@@ -30,17 +30,19 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow  rounded-box w-52 text-xl lg:text-2xl"
             >
               <NavLink to="/">Home</NavLink>
-              <NavLink to="/menu">Blogs</NavLink>
-              <NavLink to="/contact">Contact Us</NavLink>
+              <NavLink to="/menu">Blog</NavLink>
+              <NavLink to="/contact">Donation Request</NavLink>
               <NavLink to="/contact">Dashboard</NavLink>
+              <NavLink to="/contact">Fundings</NavLink>
             </ul>
           </div>
 
           <ul className="hidden lg:flex nav menu menu-horizontal text-[18px] space-x-5">
             <NavLink to="/">Home</NavLink>
-            <NavLink to="/menu">Blogs</NavLink>
-            <NavLink to="/contact">Contact Us</NavLink>
+            <NavLink to="/menu">Blog</NavLink>
+            <NavLink to="/contact">Donation Request</NavLink>
             <NavLink to="/contact">Dashboard</NavLink>
+            <NavLink to="/contact">Fundings</NavLink>
           </ul>
         </div>
 

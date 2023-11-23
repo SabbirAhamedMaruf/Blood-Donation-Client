@@ -7,7 +7,7 @@ import { LuInstagram } from "react-icons/lu";
 
 const Banner = () => {
   return (
-    <div className="w-[90vw] m-auto shadow-lg md:p-5 lg:p-10 rounded-lg lg:rounded-2xl">
+    <div className="w-[90vw] m-auto shadow-lg md:p-5 lg:p-10 rounded-lg lg:rounded-2xl mb-10">
       <div className="hidden md:flex">
         {/* Slider */}
         <div className="w-1/2 flex flex-col justify-around">
@@ -47,7 +47,7 @@ const Banner = () => {
                 </h1>
                 <p className="lg:text-xl w-[60%] font-semibold opacity-60">
                   {
-                    "Giving blood is giving the gift of life. Be a donor and share the joy of making a positive impact on someone's health."
+                    "Be a donor and share the joy of making a positive impact on someone's health."
                   }
                 </p>
               </div>
@@ -66,22 +66,22 @@ const Banner = () => {
                 </h1>
                 <p className="lg:text-xl w-[60%] font-semibold opacity-60">
                   {
-                    "Your contribution, no matter how small, can play a crucial role in someone's journey towards recovery and good health."
+                    "Your contribution, no matter how small, can play a crucial role."
                   }
                 </p>
               </div>
             </Carousel>
           </div>
 
-          <div className="flex justify-center gap-2 lg:gap-10">
+          <div className="flex justify-center gap-2 lg:gap-10 z-10">
             <Link>
-              <button className="hidden md:block md:px-2 md:py-1 lg:px-6 lg:py-2 bg-red-500 text-white rounded-full lg:text-[18px]">
-                Donate Now
+              <button className="md:px-2 md:py-1 lg:px-6 lg:py-2 bg-red-500 text-white rounded-full lg:text-[18px]">
+                Join as donor
               </button>
             </Link>
             <Link>
-              <button className="hidden md:block md:px-2 md:py-1 lg:px-6 lg:py-2 bg-black text-white rounded-full lg:text-[18px]">
-                Contact Us
+              <button className="md:px-2 md:py-1 lg:px-6 lg:py-2 bg-black text-white rounded-full lg:text-[18px]">
+                Search Donors
               </button>
             </Link>
           </div>
@@ -97,17 +97,32 @@ const Banner = () => {
           <img src={banner} className="md:pt-16 lg:pt-0" />
         </div>
       </div>
-      <div className="flex items-center md:hidden p-8">
-        <div className="text-center px-5">
-          <h1 className="font-bold text-red-500 text-xl">
-            Simple Act, Big Impact
-          </h1>
-          <p className="text-[12px]">
-            One donation can touch multiple lives and create a ripple of
-            positivity.
-          </p>
+
+      <div className="relative md:hidden">
+        <div className="flex items-center p-8">
+          <div className="text-center px-5">
+            <h1 className="font-bold text-red-500 text-xl">
+              Simple Act, Big Impact
+            </h1>
+            <p className="text-[12px]">
+              One donation can touch multiple lives and create a ripple of
+              positivity.
+            </p>
+          </div>
+          <img src={banner} className="w-1/2" />
         </div>
-        <img src={banner} className="w-1/2" />
+        <div className="absolute -bottom-4 left-[20%] flex justify-center gap-2 lg:gap-10">
+          <Link>
+            <button className="p-1 rounded-sm bg-red-500 text-white">
+              Join as donor
+            </button>
+          </Link>
+          <Link>
+            <button className="p-1 rounded-sm bg-black text-white ">
+              Search Donors
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import { FaSun } from "react-icons/fa6";
 
 const Navbar = () => {
   return (
-    <div className="px-2 md:px-10 lg:py-2 font-bold fixed w-full ">
+    <div className="px-2 md:px-10 lg:py-2 font-bold  w-full ">
       <div className="navbar">
         <div className="navbar-start">
           <div className="dropdown">

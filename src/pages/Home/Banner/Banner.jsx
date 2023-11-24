@@ -129,3 +129,5 @@ const Banner = () => {
 };
 
 export default Banner;
+
+// TODO : Clicking on the “Join as a donor” button will redirect the user to registration page and Clicking on the “Search Donors” button will redirect the user to search page

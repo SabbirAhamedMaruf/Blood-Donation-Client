@@ -63,10 +63,10 @@ const Footer = () => {
             Email : lifeflow@gmail.com
           </a>
           <a className="text-[12px] md:text-[15px] lg:text-[18px] hover:text-red-500">
-            Address : Cityville,Stateland
+            Address : Dhaka,Bangladesh
           </a>
-          <p className="text-[12px] md:text-[15px] md:ml-8 lg:ml-12 hover:text-red-500">
-            200FT Street
+          <p className="text-[12px] md:text-[15px] lg:text-[18px]  hover:text-red-500">
+            Gulshan 56 West Avenue
           </p>
         </div>
       </nav>

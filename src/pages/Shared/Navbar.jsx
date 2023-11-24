@@ -67,3 +67,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+// TODO : will have logo, donation requests, blog, login, registration link before logged in. and will have dashboard, and fundings links addition to those links.

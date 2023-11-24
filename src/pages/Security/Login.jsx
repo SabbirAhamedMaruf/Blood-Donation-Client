@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import login from "../../assets/login.png";
 import { FaGoogle } from "react-icons/fa";
 const Login = () => {
   return (
     <div>
       <div className="w-[90%] lg:w-[80vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5  flex flex-col lg:flex-row gap-10 md:gap-5 lg:gap-20 items-center">
-        <div className="md:w-1/2 p-5 lg:p-0">
+        <div className="lg:w-1/2 p-5 lg:p-0">
           <img src={login} className="shadow-lg lg:shadow-xl rounded-lg" />
         </div>
         <div className="md:w-1/2 space-y-5">
@@ -51,6 +52,7 @@ const Login = () => {
             <button className="w-full py-1  lg:py-2  text-2xl text-white font-bold rounded-full bg-red-500">
               <FaGoogle className="m-auto" />
             </button>
+            <p>Not registerd?<Link to="/register" className="ml-3 font-bold text-red-500">Click here</Link></p>
             <p className="font-bold text-red-500">Error message goes here</p>
           </div>
         </div>

@@ -55,7 +55,7 @@ const Navbar = () => {
           <button>
             <FaSun className="text-3xl md:text-[18px] p-2 md:p-0 bg-red-500 md:bg-transparent text-white md:text-black rounded-full md:rounded-none" />
           </button>
-          <Link>
+          <Link to="/login">
             <button className="hidden md:block md:px-2 md:py-1 lg:px-6 lg:py-2 bg-red-500 text-white rounded-full text-[18px]">
               Login
             </button>

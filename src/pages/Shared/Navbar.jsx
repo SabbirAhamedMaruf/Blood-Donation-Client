@@ -3,9 +3,11 @@ import logo from "../../assets/logo.png";
 import { FaSun } from "react-icons/fa6";
 import { useContext } from "react";
 import { SecurityContext } from "../../Provider/SecurityProvider";
+import useUserType from "../../API/useUserType";
 // import { IoMoon } from "react-icons/io5";
 
 const Navbar = () => {
+  const [userType] = useUserType();
   // getting user data
   const { user, handleSignOut } = useContext(SecurityContext);
   console.log(user);
@@ -38,14 +40,16 @@ const Navbar = () => {
               {user ? (
                 <>
                   <div className="flex items-center gap-2 bg-red-500 p-3 rounded-xl text-xl text-white">
-                    <h1 className="text-[13px] md:text-[18px]">{user.displayName}</h1>
+                    <h1 className="text-[13px] md:text-[18px]">
+                      {user.displayName}
+                    </h1>
                     <img src={user.photoURL} className="w-14 rounded-full" />
                   </div>
                   <ul className="text-[13px] md:text-[18px] flex flex-col text-center">
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/menu">Blog</NavLink>
                     <NavLink to="/contact">Donation Request</NavLink>
-                    <NavLink to="/contact">Dashboard</NavLink>
+                    <NavLink to="/dashboard/userprofile">Dashboard</NavLink>
                     <NavLink to="/contact">Fundings</NavLink>
                   </ul>
                   <button
@@ -70,8 +74,25 @@ const Navbar = () => {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/menu">Blog</NavLink>
             <NavLink to="/contact">Donation Request</NavLink>
-            <NavLink to="/contact">Dashboard</NavLink>
-            <NavLink to="/contact">Fundings</NavLink>
+            {/* Condition redering */}
+
+            {userType === "admin" ? (
+              <>
+                <NavLink to="/dashboard/adminprofile">Dashboard</NavLink>
+              </>
+            ) : userType === "donor" ? (
+              <NavLink to="/dashboard/userprofile">Dashboard</NavLink>
+            ) : userType === "volunteer" ? (
+              <NavLink to="/dashboard/volunteerhome">Dashboard</NavLink>
+            ) : (
+              <></>
+            )}
+            {/* 
+            {user && (
+              <>
+                <NavLink to="/contact">Fundings</NavLink>
+              </>
+            )} */}
           </ul>
         </div>
 
@@ -102,6 +123,7 @@ const Navbar = () => {
                   </div>
                   <ul className="flex flex-col">
                     <NavLink to="/contact">Dashboard</NavLink>
+                    <NavLink to="/contact">Fundings</NavLink>
                   </ul>
                   <button
                     className="px-3 py-2 bg-red-500 text-white rounded-full"

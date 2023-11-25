@@ -80,7 +80,7 @@ const Register = () => {
     const currentBloodGroup = form.bloodgroup.value;
     const currentDistrict = form.district.value;
     const currentUpazila = form.upazila.value;
-    const userType = "admin";
+    const userType = "donor";
     const status = "active";
     // getting image data
     const formData = new FormData();

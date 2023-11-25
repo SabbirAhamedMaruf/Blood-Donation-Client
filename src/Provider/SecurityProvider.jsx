@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import auth from "../firebase/Firebase.config";
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import {  createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword,signOut } from "firebase/auth";
 
 // Security context
 export const SecurityContext = createContext(null);
@@ -21,7 +21,6 @@ const SecurityProvider = ({ children }) => {
   const loginWithEmailAndPassword=(email,password)=>{
     return signInWithEmailAndPassword(auth,email,password);
   }
-
 
   // Sign Out User
   const handleSignOut =()=>{
@@ -49,7 +48,7 @@ const SecurityProvider = ({ children }) => {
     loading,
     registerWithEmailAndPassword,
     handleSignOut,
-    loginWithEmailAndPassword
+    loginWithEmailAndPassword,
   };
   return (
     <SecurityContext.Provider value={securityContextValues}>

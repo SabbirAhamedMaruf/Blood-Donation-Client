@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import login from "../../assets/login.png";
-import { FaGoogle } from "react-icons/fa";
 import { useContext } from "react";
 import { SecurityContext } from "../../Provider/SecurityProvider";
 import { NotificationContext } from "../../hooks/Notification";
@@ -11,6 +10,7 @@ const Login = () => {
     useContext(NotificationContext);
   const { loginWithEmailAndPassword } = useContext(SecurityContext);
 
+  // Login with email and password
   const handleLoginWithEmailAndPassword = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -76,9 +76,6 @@ const Login = () => {
           </form>
 
           <div className="text-center space-y-10 pb-10 md:pb-0">
-            <button className="w-full py-1  lg:py-2  text-2xl text-white font-bold rounded-full bg-red-500">
-              <FaGoogle className="m-auto" />
-            </button>
             <p>
               Not registerd?
               <Link to="/register" className="ml-3 font-bold text-red-500">

@@ -4,6 +4,7 @@ import { FaSun } from "react-icons/fa6";
 import { useContext } from "react";
 import { SecurityContext } from "../../Provider/SecurityProvider";
 import useUserType from "../../API/useUserType";
+import "../../index.css"
 // import { IoMoon } from "react-icons/io5";
 
 const Navbar = () => {
@@ -45,7 +46,7 @@ const Navbar = () => {
                     </h1>
                     <img src={user.photoURL} className="w-14 rounded-full" />
                   </div>
-                  <ul className="text-[13px] md:text-[18px] flex flex-col text-center">
+                  <ul className="navmenu text-[13px] md:text-[18px] flex flex-col text-center">
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/menu">Blog</NavLink>
                     <NavLink to="/contact">Donation Request</NavLink>
@@ -70,7 +71,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop menu */}
-          <ul className="hidden lg:flex nav menu menu-horizontal text-[18px] space-x-5">
+          <ul className="navmenu hidden lg:flex nav menu menu-horizontal text-[18px] space-x-5">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/menu">Blog</NavLink>
             <NavLink to="/contact">Donation Request</NavLink>

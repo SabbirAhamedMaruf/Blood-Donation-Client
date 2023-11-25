@@ -41,7 +41,7 @@ const DashboardNavbar = () => {
                   <img src={user?.photoURL} className="w-16" />
                 </div>
                 <div className="space-y-3 mt-5 pt-5 text-[16px] font-bold  shadow-slate-200">
-                  <ul className="text-center">
+                  <ul className="dashboardSideBar text-center">
 
 
 
@@ -50,7 +50,7 @@ const DashboardNavbar = () => {
                     
                     {/* Admin routes */}
                     {userType === "admin" ? (
-                      <NavLink to="/dashboard/profile/adminhome">
+                      <NavLink to="/dashboard/adminhome">
                         <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
                           Profile
                         </button>
@@ -65,7 +65,7 @@ const DashboardNavbar = () => {
 
                     // user routes
                     userType === "donor" ? (
-                      <NavLink to="/dashboard/profile/userhome">
+                      <NavLink to="/dashboard/userprofile">
                         <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
                           Profile
                         </button>

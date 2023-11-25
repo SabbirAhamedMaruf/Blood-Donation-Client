@@ -3,7 +3,7 @@ const ContactUs = () => {
     <div className="bg-red-500 flex flex-col-reverse md:flex-row justify-center items-center md:gap-8 lg:gap-96">
       <div className="p-10">
         <form className="p-5 lg:p-2 rounded-md flex flex-col gap-3 lg:gap-5 bg-white">
-          <h1 className="font-bold lg:text-2xl text-center text-gray-400">
+          <h1 className="font-bold lg:text-2xl text-center ">
             Your Information
           </h1>
           <div className="flex flex-col md:flex-row gap-5">
@@ -47,6 +47,7 @@ const ContactUs = () => {
             rows="5"
             placeholder="Your message"
           ></textarea>
+          <input className="text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-black" type="submit" value="Submit" />
         </form>
       </div>
       <div className="pt-5 md:pt-0 text-center md:text-left text-white space-y-3 lg:space-y-10">

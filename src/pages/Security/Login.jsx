@@ -1,7 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import login from "../../assets/login.png";
 import { FaGoogle } from "react-icons/fa";
+import { useContext } from "react";
+import { SecurityContext } from "../../Provider/SecurityProvider";
+import { NotificationContext } from "../../hooks/Notification";
+
 const Login = () => {
+  const navigate = useNavigate();
+  const { handleSuccessToast, handleErrorToast } =
+    useContext(NotificationContext);
+  const { loginWithEmailAndPassword } = useContext(SecurityContext);
+
+  const handleLoginWithEmailAndPassword = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const currentEmail = form.email.value;
+    const currentPassword = form.password.value;
+    loginWithEmailAndPassword(currentEmail, currentPassword)
+      .then(() => {
+        handleSuccessToast("User logged in successfully!");
+        navigate("/");
+      })
+      .catch((error) => {
+        handleErrorToast("An error occured!", error.message);
+      });
+  };
+
   return (
     <div>
       <div className="w-[90%] lg:w-[80vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5  flex flex-col lg:flex-row gap-10 md:gap-5 lg:gap-20 items-center">
@@ -10,7 +34,10 @@ const Login = () => {
         </div>
         <div className="md:w-1/2 space-y-5">
           <h1 className="text-center font-bold text-xl lg:text-4xl">Login</h1>
-          <form className="flex flex-col space-y-5 lg:space-y-10">
+          <form
+            onSubmit={handleLoginWithEmailAndPassword}
+            className="flex flex-col space-y-5 lg:space-y-10"
+          >
             <div className="flex items-center gap-4 md:grid grid-cols-5 lg:grid-cols-7">
               <label
                 className="text-[15px] lg:text-xl font-semibold"
@@ -44,7 +71,7 @@ const Login = () => {
             <input
               className="text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-red-500"
               type="submit"
-              value="Login"
+              value="Submit"
             />
           </form>
 
@@ -52,8 +79,12 @@ const Login = () => {
             <button className="w-full py-1  lg:py-2  text-2xl text-white font-bold rounded-full bg-red-500">
               <FaGoogle className="m-auto" />
             </button>
-            <p>Not registerd?<Link to="/register" className="ml-3 font-bold text-red-500">Click here</Link></p>
-            <p className="font-bold text-red-500">Error message goes here</p>
+            <p>
+              Not registerd?
+              <Link to="/register" className="ml-3 font-bold text-red-500">
+                Click here
+              </Link>
+            </p>
           </div>
         </div>
       </div>

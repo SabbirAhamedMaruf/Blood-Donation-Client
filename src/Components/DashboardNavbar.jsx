@@ -1,14 +1,11 @@
 import { NavLink } from "react-router-dom";
 import { HiMenuAlt1 } from "react-icons/hi";
 import useUserType from "../API/useUserType";
-import { useContext } from "react";
-import { SecurityContext } from "../Provider/SecurityProvider";
+import useUserData from "../API/useUserData";
 
 const DashboardNavbar = () => {
-  const { user } = useContext(SecurityContext);
-  // getting user data from user state
+  const [,userData] = useUserData();
   const [userType] = useUserType();
-  console.log(userType);
 
   return (
     <div className="pt-2 shadow-lg">
@@ -36,9 +33,9 @@ const DashboardNavbar = () => {
                 <h1 className="font-bold text-3xl lg:text-3xl">Dashboard</h1>
                 <div className="my-5 flex justify-between items-center bg-red-500 p-3 rounded-2xl">
                   <h1 className="text-2xl text-white font-bold">
-                    {user?.displayName}
+                    {userData?.name}
                   </h1>
-                  <img src={user?.photoURL} className="w-16" />
+                  <img src={userData?.photo} className="w-16" />
                 </div>
                 <div className="space-y-3 mt-5 pt-5 text-[16px] font-bold  shadow-slate-200">
                   <ul className="dashboardSideBar text-center">
@@ -50,59 +47,57 @@ const DashboardNavbar = () => {
                     
                     {/* Admin routes */}
                     {userType === "admin" ? (
-                      <NavLink to="/dashboard/adminhome">
+                      <ul>
+                        <NavLink to="/dashboard/adminhome">
                         <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
                           Profile
                         </button>
                       </NavLink>
-                    ) : 
-
-
-
-
-
-
-
-                    // user routes
+                      </ul>
+                    ) : // user routes
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     userType === "donor" ? (
-                      <NavLink to="/dashboard/userprofile">
-                        <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
-                          Profile
-                        </button>
-                      </NavLink>
-                    ) :
+                      <ul>
+                        <NavLink to="/dashboard/donorprofile">
+                          <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
+                            Profile
+                          </button>
+                        </NavLink>
+                        ,
+                        <NavLink to="/dashboard/donorhome">
+                          <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
+                            Home
+                          </button>
+                        </NavLink>
+                      </ul>
+                    ) : // Volunteer  routes
                     
                     
-
-
-
-
-
-
-
-
-
-                    // Volunteer  routes
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                     userType === "volunteer" ? (
                       <p>volentier</p>
-                    ) : 
-                    // else method
-                    (
+                    ) : (
+                      // else method
                       <></>
                     )}
 
-                    {/* {
-                      if(userType === "admin"){
-                        `
-                        
-                        
-                        `
-                      }else{
-                        `
-                        
-                        `
-                      }
-                    } */}
+                    
+                    
                   </ul>
                   <div className="border-b-2 border-black opacity-25 w-[80%] m-auto"></div>
                   <ul>
@@ -120,8 +115,8 @@ const DashboardNavbar = () => {
 
         <div className="navbar-center hidden lg:flex"></div>
         <div className="navbar-end gap-5">
-          <h1 className="text-xl font-bold">{user.displayName}</h1>
-          <img src={user?.photoURL} className="w-10" />
+          <h1 className="text-xl font-bold">{userData.name}</h1>
+          <img src={userData?.photo} className="w-10" />
         </div>
       </div>
     </div>
@@ -129,3 +124,5 @@ const DashboardNavbar = () => {
 };
 
 export default DashboardNavbar;
+
+// TODO fix this bound refetch

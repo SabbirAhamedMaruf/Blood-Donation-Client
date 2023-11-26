@@ -6,6 +6,7 @@ import { NotificationContext } from "../../hooks/Notification";
 import axios from "axios";
 import useAxiosPublic from "../../API/useAxiosPublic";
 import { updateProfile } from "firebase/auth";
+import useDistrictsData from "../../API/useDistrictsData";
 
 const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${
   import.meta.env.VITE_IMAGEBB_API
@@ -15,7 +16,7 @@ const Register = () => {
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   // getting form field data
-  const [districtData, setDistrictsData] = useState([]);
+  const [districtData] = useDistrictsData();
   const [upazilaData, setUpazilaData] = useState([]);
 
   // handling error
@@ -54,15 +55,8 @@ const Register = () => {
     }
   }, [password, confrimPassword]);
 
-  // fetching data for district and upazilas
-  useEffect(() => {
-    axiosPublic
-      .get("/districts")
-      .then((res) => setDistrictsData(res.data.data));
-  }, [axiosPublic]);
-
   // getting upazila data based on districts
-  const handleGetDistrict = (e) => {
+  const handleGetUpazilas = (e) => {
     e.preventDefault();
     const userDistricts = e.target.value;
     axiosPublic
@@ -276,7 +270,7 @@ const Register = () => {
                 className="col-span-2 md:col-span-3 lg:col-span-5 text-[12px] md:text-[15px] px-2 py-3 bg-red-50 outline-none"
                 name="district"
                 required
-                onChange={handleGetDistrict}
+                onChange={handleGetUpazilas}
               >
                 <option value="none">Select your district</option>
                 {districtData?.map((i) => (

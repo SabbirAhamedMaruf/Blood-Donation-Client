@@ -82,9 +82,9 @@ const Navbar = () => {
                 <NavLink to="/dashboard/adminprofile">Dashboard</NavLink>
               </>
             ) : userType === "donor" ? (
-              <NavLink to="/dashboard/userprofile">Dashboard</NavLink>
+              <NavLink to="/dashboard/donorprofile">Dashboard</NavLink>
             ) : userType === "volunteer" ? (
-              <NavLink to="/dashboard/volunteerhome">Dashboard</NavLink>
+              <NavLink to="/dashboard/volunteerprofile">Dashboard</NavLink>
             ) : (
               <></>
             )}

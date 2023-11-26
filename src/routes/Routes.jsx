@@ -6,9 +6,10 @@ import Login from "../pages/Security/Login";
 import Register from "../pages/Security/Register";
 import Dashboard from "../layouts/Dashboard";
 import PrivateRoutes from "./PrivateRoutes";
-import UserProfile from "../pages/Dashboard/User/UserProfile";
 import AdminProfile from "../pages/Dashboard/Admin/AdminProfile";
-import VolunteerHome from "../pages/Dashboard/Volunteer/VolunteerHome";
+import VolunteerProfile from "../pages/Dashboard/Volunteer/VolunteerProfile";
+import DonorProfile from "../pages/Dashboard/Donor/DonorProfile";
+import DonorHome from "../pages/Dashboard/Donor/DonorHome";
 
 
 const routes = createBrowserRouter([
@@ -47,15 +48,19 @@ const routes = createBrowserRouter([
 
       // Donor Routes
       {
-        path:"/dashboard/userprofile",
-        element:<UserProfile/>
+        path:"/dashboard/donorprofile",
+        element:<DonorProfile/>
+      },
+      {
+        path:"/dashboard/donorhome",
+        element: <DonorHome/>
       },
 
 
       // Volunteer Routes
       {
-        path: "/dashboard/volunteerhome",
-        element:<VolunteerHome/>
+        path: "/dashboard/volunteerprofile",
+        element:<VolunteerProfile/>
       }
     ]
   }

@@ -21,7 +21,7 @@ const DashboardNavbar = () => {
               </label>
             </div>
 
-            <div className="drawer-side">
+            <div className="drawer-side z-30">
               <label
                 htmlFor="my-drawer"
                 aria-label="close sidebar"
@@ -47,7 +47,7 @@ const DashboardNavbar = () => {
                     
                     {/* Admin routes */}
                     {userType === "admin" ? (
-                      <ul>
+                      <ul className="flex flex-col gap-5">
                         <NavLink to="/dashboard/adminhome">
                         <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
                           Profile
@@ -64,16 +64,25 @@ const DashboardNavbar = () => {
                     
                     
                     userType === "donor" ? (
-                      <ul>
+                      <ul className="flex flex-col gap-5">
                         <NavLink to="/dashboard/donorprofile">
                           <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
                             Profile
                           </button>
                         </NavLink>
-                        ,
                         <NavLink to="/dashboard/donorhome">
                           <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
                             Home
+                          </button>
+                        </NavLink>
+                        <NavLink to="/dashboard/my-donation-requests">
+                          <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
+                            My Donation Requests
+                          </button>
+                        </NavLink>
+                        <NavLink to="/dashboard/create-donation-request">
+                          <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
+                            Create Donation Request
                           </button>
                         </NavLink>
                       </ul>

@@ -10,6 +10,8 @@ import AdminProfile from "../pages/Dashboard/Admin/AdminProfile";
 import VolunteerProfile from "../pages/Dashboard/Volunteer/VolunteerProfile";
 import DonorProfile from "../pages/Dashboard/Donor/DonorProfile";
 import DonorHome from "../pages/Dashboard/Donor/DonorHome";
+import DonorCreateDonation from "../pages/Dashboard/Donor/DonorCreateDonation";
+import DonorDonation from "../pages/Dashboard/Donor/DonorDonation";
 
 
 const routes = createBrowserRouter([
@@ -54,6 +56,14 @@ const routes = createBrowserRouter([
       {
         path:"/dashboard/donorhome",
         element: <DonorHome/>
+      },
+      {
+        path:"/dashboard/my-donation-requests",
+        element: <DonorDonation/>
+      },
+      {
+        path:"/dashboard/create-donation-request",
+        element: <DonorCreateDonation/>
       },
 
 

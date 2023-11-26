@@ -1,16 +1,35 @@
-import { useContext, useState } from "react";
-import useDistrictsData from "../../../API/useDistrictsData";
-import useUserData from "../../../API/useUserData";
+import { useContext, useEffect, useState } from "react";
 import useAxiosPublic from "../../../API/useAxiosPublic";
+import useDistrictsData from "../../../API/useDistrictsData";
+import { useNavigate, useParams } from "react-router-dom";
 import { NotificationContext } from "../../../hooks/Notification";
 
-const DonorCreateDonation = () => {
+const UpdateDonationData = () => {
   const { handleSuccessToast, handleErrorToast } =
     useContext(NotificationContext);
   const axiosPublic = useAxiosPublic();
-  const [, userData] = useUserData();
   const [districtData] = useDistrictsData();
   const [upazilaData, setUpazilaData] = useState([]);
+  const navigate = useNavigate();
+  const params = useParams();
+  const [currentDonationData, setCurrentDonationData] = useState([]);
+
+  const {
+    requestername,
+    requesteremail,
+    recipientname,
+    bloodgroup,
+    hospitalname,
+    address,
+    donationdate,
+    requestmessage,
+  } = currentDonationData;
+  // getting donation data
+  useEffect(() => {
+    axiosPublic
+      .get(`/getsingledonationdata?donationDataId=${params.id}`)
+      .then((res) => setCurrentDonationData(res.data.data));
+  }, [axiosPublic, params.id, setCurrentDonationData]);
 
   // getting upazila data based on districts
   const handleGetUpazilas = (e) => {
@@ -21,67 +40,62 @@ const DonorCreateDonation = () => {
       .then((res) => setUpazilaData(res.data.data));
   };
 
-  const handleCreateDonationRequest = (e) => {
+  //   updating donation request
+  const handleDonationDataUpdate = (e) => {
     e.preventDefault();
+    const form = e.target;
+    const currentrequestername = form.requestername.value;
+    const currentrequesteremail = form.requesteremail.value;
+    const currentrecipientname = form.recipientname.value;
+    const currentrecipientdistrict = form.recipientdistrict.value;
+    const currentrecipientupazila = form.recipientupazila.value;
+    const currentbloodgroup = form.bloodgroup.value;
+    const currenthospitalname = form.hospitalname.value;
+    const currentaddress = form.address.value;
+    const currentdonationdate = form.donationdate.value;
+    const currentdonationtime = form.donationtime.value;
+    const currentrequestmessage = form.requestmessage.value;
+    const time = new Date(`${currentdonationdate}T${currentdonationtime}`);
 
-    if (userData.status === "active") {
-      const form = e.target;
-      const currentrequestername = form.requestername.value;
-      const currentrequesteremail = form.requesteremail.value;
-      const currentrecipientname = form.recipientname.value;
-      const currentrecipientdistrict = form.recipientdistrict.value;
-      const currentrecipientupazila = form.recipientupazila.value;
-      const currentbloodgroup = form.bloodgroup.value;
-      const currenthospitalname = form.hospitalname.value;
-      const currentaddress = form.address.value;
-      const currentdonationdate = form.donationdate.value;
-      const currentdonationtime = form.donationtime.value;
-      const currentrequestmessage = form.requestmessage.value;
-      const time = new Date(`${currentdonationdate}T${currentdonationtime}`);
-      const status = "pending";
+    // formatting time
+    const formatedTime = new Intl.DateTimeFormat("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    }).format(time);
 
-      // formatting time
-      const formatedTime = new Intl.DateTimeFormat("en-US", {
-        hour: "numeric",
-        minute: "numeric",
-        hour12: true,
-      }).format(time);
+    if (currentrecipientdistrict === "none") {
+      handleErrorToast("Please add your district");
+    } else if (currentrecipientupazila === "none") {
+      handleErrorToast("Please add your upazila");
+    } else {
+      const donationRequest = {
+        requestername: currentrequestername,
+        requesteremail: currentrequesteremail,
+        recipientname: currentrecipientname,
+        recipientdistrict: currentrecipientdistrict,
+        recipientupazila: currentrecipientupazila,
+        bloodgroup: currentbloodgroup,
+        hospitalname: currenthospitalname,
+        address: currentaddress,
+        donationdate: currentdonationdate,
+        donationtime: formatedTime,
+        requestmessage: currentrequestmessage,
+      };
 
-      if (
-        currentrecipientdistrict === "none" &&
-        currentrecipientupazila === "none"
-      ) {
-        handleErrorToast("Please add your district and upazila");
-      } else if (currentrecipientupazila === "none") {
-        handleErrorToast("Please add your upazila");
-      } else {
-        const donationRequest = {
-          requestername: currentrequestername,
-          requesteremail: currentrequesteremail,
-          recipientname: currentrecipientname,
-          recipientdistrict: currentrecipientdistrict,
-          recipientupazila: currentrecipientupazila,
-          bloodgroup: currentbloodgroup,
-          hospitalname: currenthospitalname,
-          address: currentaddress,
-          donationdate: currentdonationdate,
-          donationtime: formatedTime,
-          requestmessage: currentrequestmessage,
-          status,
-        };
-        axiosPublic
-          .post("/createdonationrequests", donationRequest)
-          .then((res) => {
-            if (res.data.success) {
-              handleSuccessToast("Donation request created successfully!");
-              form.reset();
-            } else {
-              handleErrorToast(
-                "This account is blocked. And can't create donation request!"
-              );
-            }
-          });
-      }
+      axiosPublic
+        .patch(
+          `/updatedonationrequestsdata?donationDataId=${params.id}`,
+          donationRequest
+        )
+        .then((res) => {
+          if (res.data.data.acknowledged) {
+            handleSuccessToast("Donation data updated successfully!");
+            navigate("/dashboard/donorhome");
+          } else {
+            handleErrorToast("An error occured during updating donation data!");
+          }
+        });
     }
   };
 
@@ -90,9 +104,9 @@ const DonorCreateDonation = () => {
       <div className="w-[90%] lg:w-[80vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">
         <div>
           <h1 className="text-center font-bold text-xl lg:text-4xl my-10">
-            Create Donation Reaquest
+            Update Donation Reaquest
           </h1>
-          <form onSubmit={handleCreateDonationRequest} className="py-10">
+          <form onSubmit={handleDonationDataUpdate} className="py-10">
             <div className="flex flex-col lg:flex-row justify-around p-3 text-[12px] md:text-[15px]">
               <div className="space-y-2 md:space-y-3 lg:space-y-10">
                 <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7">
@@ -103,9 +117,9 @@ const DonorCreateDonation = () => {
                     Requester Name
                   </label>
                   <input
+                    defaultValue={requestername}
                     className="font-semibold col-span-2 md:col-span-3 lg:col-span-5 px-2 py-2 bg-red-50 outline-none"
                     disabled
-                    defaultValue={userData.name}
                     type="text"
                     name="requestername"
                     placeholder="Enter requester name"
@@ -121,9 +135,9 @@ const DonorCreateDonation = () => {
                     Requester Email
                   </label>
                   <input
+                    defaultValue={requesteremail}
                     className="font-semibold col-span-2 md:col-span-3 lg:col-span-5 px-2 py-2 bg-red-50 outline-none"
                     disabled
-                    defaultValue={userData.email}
                     type="email"
                     name="requesteremail"
                     placeholder="Enter requester email"
@@ -139,6 +153,7 @@ const DonorCreateDonation = () => {
                     Recipient Name
                   </label>
                   <input
+                    defaultValue={recipientname}
                     className="col-span-2 md:col-span-3 lg:col-span-5 px-2 py-2 bg-red-50 outline-none"
                     type="text"
                     name="recipientname"
@@ -198,6 +213,7 @@ const DonorCreateDonation = () => {
                     Blood Group
                   </label>
                   <select
+                    value={bloodgroup}
                     className="col-span-2 md:col-span-3 lg:col-span-5 text-[12px] md:text-[15px] px-2 py-3 bg-red-50 outline-none"
                     name="bloodgroup"
                     required
@@ -224,6 +240,7 @@ const DonorCreateDonation = () => {
                     Hospital Name
                   </label>
                   <input
+                    defaultValue={hospitalname}
                     className="col-span-2 md:col-span-3 lg:col-span-5 px-2 py-2 bg-red-50 outline-none"
                     type="text"
                     name="hospitalname"
@@ -240,6 +257,7 @@ const DonorCreateDonation = () => {
                     Address
                   </label>
                   <input
+                    defaultValue={address}
                     className="col-span-2 md:col-span-3 lg:col-span-5 px-2 py-2 bg-red-50 outline-none"
                     type="text"
                     name="address"
@@ -256,6 +274,7 @@ const DonorCreateDonation = () => {
                     Donation Date
                   </label>
                   <input
+                    defaultValue={donationdate}
                     className="col-span-2 md:col-span-3 lg:col-span-5 px-2 py-2 bg-red-50 outline-none"
                     type="date"
                     name="donationdate"
@@ -286,6 +305,7 @@ const DonorCreateDonation = () => {
                     Request Message
                   </label>
                   <textarea
+                    defaultValue={requestmessage}
                     placeholder="Why you need blood?"
                     className="col-span-2 md:col-span-3 lg:col-span-5 px-2 py-2 bg-red-50 outline-none"
                     name="requestmessage"
@@ -299,7 +319,7 @@ const DonorCreateDonation = () => {
             <input
               className="ml-[38%] md:ml-[42%] lg:ml-[6%] px-4 text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-red-500"
               type="submit"
-              value="Request"
+              value="Update"
             />
           </form>
         </div>
@@ -308,4 +328,6 @@ const DonorCreateDonation = () => {
   );
 };
 
-export default DonorCreateDonation;
+export default UpdateDonationData;
+
+// TODO: how to set as default value on drop down menu. remember upazila data will fetch after selecting districts data. and how to set time input defaultvalue

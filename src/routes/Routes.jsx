@@ -12,6 +12,7 @@ import DonorProfile from "../pages/Dashboard/Donor/DonorProfile";
 import DonorHome from "../pages/Dashboard/Donor/DonorHome";
 import DonorCreateDonation from "../pages/Dashboard/Donor/DonorCreateDonation";
 import DonorDonation from "../pages/Dashboard/Donor/DonorDonation";
+import UpdateDonationData from "../pages/Dashboard/Donor/UpdateDonationData";
 
 
 const routes = createBrowserRouter([
@@ -64,6 +65,10 @@ const routes = createBrowserRouter([
       {
         path:"/dashboard/create-donation-request",
         element: <DonorCreateDonation/>
+      },
+      {
+        path:"/dashboard/update-donation-request/:id",
+        element: <UpdateDonationData/>
       },
 
 

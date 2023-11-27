@@ -13,6 +13,7 @@ import DonorHome from "../pages/Dashboard/Donor/DonorHome";
 import DonorCreateDonation from "../pages/Dashboard/Donor/DonorCreateDonation";
 import DonorDonation from "../pages/Dashboard/Donor/DonorDonation";
 import UpdateDonationData from "../pages/Dashboard/Donor/UpdateDonationData";
+import DonorFundForOrganization from "../pages/Dashboard/Donor/DonorFundForOrganization";
 
 
 const routes = createBrowserRouter([
@@ -45,37 +46,40 @@ const routes = createBrowserRouter([
       // Admin Routes
       {
         path:"/dashboard/adminprofile",
-        element:<AdminProfile/>
+        element:<PrivateRoutes><AdminProfile/></PrivateRoutes>
       },
 
 
       // Donor Routes
       {
         path:"/dashboard/donorprofile",
-        element:<DonorProfile/>
+        element:<PrivateRoutes><DonorProfile/></PrivateRoutes>
       },
       {
         path:"/dashboard/donorhome",
-        element: <DonorHome/>
+        element: <PrivateRoutes><DonorHome/></PrivateRoutes>
       },
       {
         path:"/dashboard/my-donation-requests",
-        element: <DonorDonation/>
+        element: <PrivateRoutes><DonorDonation/></PrivateRoutes>
       },
       {
         path:"/dashboard/create-donation-request",
-        element: <DonorCreateDonation/>
+        element: <PrivateRoutes><DonorCreateDonation/></PrivateRoutes>
       },
       {
         path:"/dashboard/update-donation-request/:id",
-        element: <UpdateDonationData/>
+        element: <PrivateRoutes><UpdateDonationData/></PrivateRoutes>
       },
-
-
+      {
+        path:"/dashboard/donorfundfororganization",
+        element:<DonorFundForOrganization/>
+      },
+      
       // Volunteer Routes
       {
         path: "/dashboard/volunteerprofile",
-        element:<VolunteerProfile/>
+        element:<PrivateRoutes><VolunteerProfile/></PrivateRoutes>
       }
     ]
   }

@@ -85,6 +85,11 @@ const DashboardNavbar = () => {
                             Create Donation Request
                           </button>
                         </NavLink>
+                        <NavLink to="/dashboard/donorfundfororganization">
+                          <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
+                            Funding
+                          </button>
+                        </NavLink>
                       </ul>
                     ) : // Volunteer  routes
                     

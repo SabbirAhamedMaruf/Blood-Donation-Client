@@ -67,6 +67,8 @@ const DonorCreateDonation = () => {
           donationdate: currentdonationdate,
           donationtime: formatedTime,
           requestmessage: currentrequestmessage,
+          donorname:"null",
+          donoremail:"null",
           status,
         };
         axiosPublic

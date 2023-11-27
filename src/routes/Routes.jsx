@@ -14,6 +14,7 @@ import DonorCreateDonation from "../pages/Dashboard/Donor/DonorCreateDonation";
 import DonorDonation from "../pages/Dashboard/Donor/DonorDonation";
 import UpdateDonationData from "../pages/Dashboard/Donor/UpdateDonationData";
 import DonorFundForOrganization from "../pages/Dashboard/Donor/DonorFundForOrganization";
+import ViewDonationDetails from "../pages/Dashboard/Donor/ViewDonationDetails";
 
 
 const routes = createBrowserRouter([
@@ -74,6 +75,10 @@ const routes = createBrowserRouter([
       {
         path:"/dashboard/donorfundfororganization",
         element:<DonorFundForOrganization/>
+      },
+      {
+        path:"/dashboard/view-donation-details/:id",
+        element:<ViewDonationDetails/>
       },
       
       // Volunteer Routes

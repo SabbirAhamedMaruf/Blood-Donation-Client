@@ -1,10 +1,55 @@
+import { useContext, useState } from "react";
 import useDonorDonationData from "../../../API/useDonorDonationData";
 import useUserData from "../../../API/useUserData";
-import SingleDonationData from "../../../Components/SingleDonationData";
-
+import SingleDonationData from "../../../Components/SingleDonationData"; 
+import { NotificationContext } from "../../../hooks/Notification";
+import useAxiosPublic from "../../../API/useAxiosPublic";
+import { Link } from "react-router-dom";
 const DonorHome = () => {
-  const [,userData] = useUserData();
-  const [donorDonationData] = useDonorDonationData();
+  const { handleSuccessToast, handleErrorToast } =
+    useContext(NotificationContext);
+  const [, userData] = useUserData();
+  const [donorDonationData, refetch] = useDonorDonationData();
+  const axiosPublic = useAxiosPublic();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showChangeStatusModal, setShowChangeStatusModal] = useState(false);
+
+  // deleteing donation request
+  const handleDeleteDonationData = (donationId) => {
+    axiosPublic
+      .delete(`/deletedonationrequestsdata?donationId=${donationId}`)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.data.acknowledged) {
+          handleSuccessToast("Donation request deleted successfully!");
+          setShowDeleteModal(false);
+          refetch();
+        } else {
+          handleErrorToast(
+            "An error occured during deletion donation request!"
+          );
+        }
+      });
+  };
+
+  // update donation status
+  const handleUpdateDonationStatus = (donationId, status) => {
+    console.log(donationId, status);
+    axiosPublic
+      .patch(`/confrimdonation?donationId=${donationId}&status=${status}`)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.data.acknowledged) {
+          handleSuccessToast("Donation request deleted successfully!");
+          setShowDeleteModal(false);
+          refetch();
+        } else {
+          handleErrorToast(
+            "An error occured during deletion donation request!"
+          );
+        }
+      });
+  };
 
   return (
     <div>
@@ -14,7 +59,9 @@ const DonorHome = () => {
             Welcome {userData.name}
           </h1>
           {donorDonationData.length === 0 ? (
-            <h1 className="text-xl md:text-2xl lg:text-3xl text-red-500 font-semibold text-center mt-60">Not donation request found</h1>
+            <h1 className="text-xl md:text-2xl lg:text-3xl text-red-500 font-semibold text-center mt-60">
+              Not donation request found
+            </h1>
           ) : (
             <div className="h-3/4 w-full py-5">
               <div className="overflow-x-auto ">
@@ -39,6 +86,13 @@ const DonorHome = () => {
                         key={i._id}
                         number={idx}
                         data={i}
+                        refetch={refetch}
+                        handleDeleteDonationData={handleDeleteDonationData}
+                        setShowDeleteModal={setShowDeleteModal}
+                        showDeleteModal={showDeleteModal}
+                        showChangeStatusModal={showChangeStatusModal}
+                        setShowChangeStatusModal={setShowChangeStatusModal}
+                        handleUpdateDonationStatus={handleUpdateDonationStatus}
                       ></SingleDonationData>
                     ))}
                   </tbody>
@@ -57,11 +111,21 @@ const DonorHome = () => {
                     </tr>
                   </tfoot>
                 </table>
-                <button className="ml-[38%] md:ml-[42%] lg:ml-[1%] mt-[2%] px-4 text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-blue-500">
-                  View all
-                </button>
               </div>
             </div>
+          )}
+          {donorDonationData.length === 0 ? (
+            <Link to="/dashboard/my-donation-requests">
+              <button className="ml-[38%] md:ml-[42%] lg:ml-[1%] mt-[15%] px-4 text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-blue-500">
+                View my request
+              </button>
+            </Link>
+          ) : (
+            <Link to="/dashboard/my-donation-requests">
+              <button className="ml-[38%] md:ml-[42%] lg:ml-[1%] mt-[2%] px-4 text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-blue-500">
+                View my request
+              </button>
+            </Link>
           )}
         </div>
       </div>
@@ -70,25 +134,3 @@ const DonorHome = () => {
 };
 
 export default DonorHome;
-
-
-// TODO data refetching not working after deleting donation data. tried refetch, and props and state
-
-
-
-// > Must Check
-/***
-//?       donation delete page after clicking view donation request button from home of donor
- //?       The form will have following input fields
-○ //?      donor name(read only - logged in user name)
-○ //?       donor email(read only - logged in user email)
-
-//?        donor creating donation reqest on home page
-
-//?       Below of the welcome section donor will see his maximum 3 recent donation
-//?       request those was requested by the donor who is currently logged in.
-
-//?       jodi donor request create kore and view delete page a gia login user info nei keno?
-
-
- */ 

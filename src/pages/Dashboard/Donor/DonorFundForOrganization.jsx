@@ -10,16 +10,16 @@ import { SecurityContext } from "../../../Provider/SecurityProvider";
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_API_KEY);
 const DonorFundForOrganization = () => {
   const [paymentData, setPaymentData] = useState([]);
-
   const { user } = useContext(SecurityContext);
   const axiosSecure = useAxiosSecure();
+  const [handleRefetch,setHandleRefetch] = useState(true);
 
   // getting user payments
   useEffect(() => {
     axiosSecure
       .get(`/get-all-user-payments?email=${user.email}`)
       .then((res) => setPaymentData(res.data.data));
-  }, [axiosSecure, user.email]);
+  }, [axiosSecure, user.email,handleRefetch]);
 
   console.log(paymentData);
 
@@ -33,7 +33,7 @@ const DonorFundForOrganization = () => {
           <h1 className="text-center font-bold text-xl lg:text-4xl">Funding</h1>
           <div>
             <Elements stripe={stripePromise}>
-              <CheckoutForm />
+              <CheckoutForm handleRefetch={handleRefetch} setHandleRefetch={setHandleRefetch}/>
             </Elements>
           </div>
         </div>
@@ -44,8 +44,8 @@ const DonorFundForOrganization = () => {
 
         <div>
           {paymentData.length === 0 ? (
-            <h1 className="text-xl md:text-2xl lg:text-3xl text-red-500 font-semibold text-center mt-60">
-              Not donation request found
+            <h1 className="text-xl md:text-2xl lg:text-3xl text-red-500 font-semibold text-center my-20">
+              Not payments found
             </h1>
           ) : (
             <div className="w-[70vw] m-auto py-5">

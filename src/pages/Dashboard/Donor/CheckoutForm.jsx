@@ -3,8 +3,9 @@ import { useContext, useEffect, useState } from "react";
 import { NotificationContext } from "../../../hooks/Notification";
 import useAxiosSecure from "../../../API/useAxiosSecure";
 import { SecurityContext } from "../../../Provider/SecurityProvider";
+import PropTypes from "prop-types";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({ handleRefetch, setHandleRefetch }) => {
   const { user } = useContext(SecurityContext);
   const axiosSecure = useAxiosSecure();
   const { handleSuccessToast, handleErrorToast } =
@@ -87,8 +88,10 @@ const CheckoutForm = () => {
 
           // payment entry api
           axiosSecure
-            .post("/add-my-payment", paymentInfo)
-            .then((res) => console.log(res.data));
+            .post(`/add-my-payment?email=${user.email}`, paymentInfo)
+            .then(() => {
+              setHandleRefetch(!handleRefetch);
+            });
         }
       }
     }
@@ -146,6 +149,11 @@ const CheckoutForm = () => {
       </form>
     </div>
   );
+};
+
+CheckoutForm.propTypes = {
+  handleRefetch: PropTypes.bool,
+  setHandleRefetch: PropTypes.func,
 };
 
 export default CheckoutForm;

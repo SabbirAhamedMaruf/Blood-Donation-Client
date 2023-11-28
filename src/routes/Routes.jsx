@@ -15,6 +15,8 @@ import ViewDonationDetails from "../pages/Dashboard/Donor/ViewDonationDetails";
 import Profile from "../pages/Dashboard/Shared/Profile";
 import AdminHome from "../pages/Dashboard/Admin/AdminHome";
 import VolunteerHome from "../pages/Dashboard/Volunteer/VolunteerHome";
+import ManageAllUsers from "../pages/Dashboard/Admin/ManageAllUsers";
+import AllBloodDonationPage from "../pages/Dashboard/Admin/AllBloodDonationPage";
 
 
 const routes = createBrowserRouter([
@@ -56,6 +58,14 @@ const routes = createBrowserRouter([
       {
         path:"/dashboard/adminhome",
         element: <PrivateRoutes><AdminHome/></PrivateRoutes>
+      },
+      {
+        path:"/dashboard/all-users",
+        element: <PrivateRoutes><ManageAllUsers/></PrivateRoutes>
+      },
+      {
+        path:"/dashboard/all-blood-donation-request",
+        element: <PrivateRoutes><AllBloodDonationPage/></PrivateRoutes>
       },
 
 

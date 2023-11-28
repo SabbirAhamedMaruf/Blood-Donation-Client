@@ -131,7 +131,7 @@ const Register = () => {
           }
         })
         .catch((error) => {
-          setError("An error occured! Error :", error.message);
+          setError(error.message);
         });
     }
   };

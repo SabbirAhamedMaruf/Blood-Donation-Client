@@ -56,6 +56,25 @@ const DashboardNavbar = () => {
                             Home
                           </button>
                         </NavLink>
+
+                        <NavLink to="/dashboard/all-users">
+                          <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
+                            Manage Users
+                          </button>
+                        </NavLink>
+
+                        <NavLink to="/dashboard/all-blood-donation-request">
+                          <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
+                            All Blood Donations
+                          </button>
+                        </NavLink>
+
+                        
+                        <NavLink to="/dashboard/all-blood-donation-request">
+                          <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
+                            All Blood Donations
+                          </button>
+                        </NavLink>
                       </ul>
                     ) : // user routes
 

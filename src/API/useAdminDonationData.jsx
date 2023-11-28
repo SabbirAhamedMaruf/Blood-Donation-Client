@@ -14,7 +14,7 @@ const useAdminDonationData = () => {
     queryKey : [user?.email,"adminDonationData"],
     enabled: !loading,
     queryFn: async()=>{
-      const res = await axiosSecure.get(`/fetchdonordonation?email=${user.email}`);
+      const res = await axiosSecure.get(`/getalldonation?email=${user.email}`);
       return res.data.data
     }
   })

@@ -1,26 +1,24 @@
 import { useContext, useEffect, useState } from "react";
 import useAxiosPublic from "../../../API/useAxiosPublic";
 import useDistrictsData from "../../../API/useDistrictsData";
-import { useNavigate, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { NotificationContext } from "../../../hooks/Notification";
 import { SecurityContext } from "../../../Provider/SecurityProvider";
 import useAxiosSecure from "../../../API/useAxiosSecure";
 
 const UpdateDonationData = () => {
   const {user}=useContext(SecurityContext);
+  console.log(user)
   const { handleSuccessToast, handleErrorToast } =
     useContext(NotificationContext);
   const axiosPublic = useAxiosPublic();
   const axiosSecure= useAxiosSecure();
   const [districtData] = useDistrictsData();
   const [upazilaData, setUpazilaData] = useState([]);
-  const navigate = useNavigate();
   const params = useParams();
   const [currentDonationData, setCurrentDonationData] = useState([]);
 
   const {
-    requestername,
-    requesteremail,
     recipientname,
     bloodgroup,
     hospitalname,
@@ -99,7 +97,6 @@ const UpdateDonationData = () => {
         .then((res) => {
           if (res.data.data.acknowledged) {
             handleSuccessToast("Donation data updated successfully!");
-            navigate("/dashboard/donorhome");
           } else {
             handleErrorToast("An error occured during updating donation data!");
           }
@@ -125,7 +122,7 @@ const UpdateDonationData = () => {
                     Requester Name
                   </label>
                   <input
-                    defaultValue={requestername}
+                    defaultValue={user.displayName}
                     className="font-semibold col-span-2 md:col-span-3 lg:col-span-5 px-2 py-2 bg-red-50 outline-none"
                     disabled
                     type="text"
@@ -143,7 +140,7 @@ const UpdateDonationData = () => {
                     Requester Email
                   </label>
                   <input
-                    defaultValue={requesteremail}
+                    defaultValue={user.email}
                     className="font-semibold col-span-2 md:col-span-3 lg:col-span-5 px-2 py-2 bg-red-50 outline-none"
                     disabled
                     type="email"

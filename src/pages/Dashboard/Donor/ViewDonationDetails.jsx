@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useUserData from "../../../API/useUserData";
 import { NotificationContext } from "../../../hooks/Notification";
 import useAxiosSecure from "../../../API/useAxiosSecure";
@@ -13,7 +13,6 @@ const ViewDonationDetails = () => {
   const [showDonateModal, setShowDonateModal] = useState(false);
   const [currentDonationData, setCurrentDonationData] = useState([]);
   const params = useParams();
-  const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
   const {
     requestername,
@@ -49,7 +48,6 @@ const ViewDonationDetails = () => {
           handleSuccessToast(
             "Thanks for your kindness. Please visit recipient!"
           );
-          navigate("/dashboard/donorhome");
         } else {
           handleErrorToast("An error occured during confirmation!");
         }

@@ -29,6 +29,7 @@ const CheckoutForm = ({ handleRefetch, setHandleRefetch }) => {
   // Payment submission handler
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const form = e.target
     if (!stripe || !elements) {
       return;
     }
@@ -95,6 +96,7 @@ const CheckoutForm = ({ handleRefetch, setHandleRefetch }) => {
         }
       }
     }
+    form.reset();
   };
 
   return (

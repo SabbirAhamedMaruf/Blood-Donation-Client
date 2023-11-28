@@ -326,4 +326,4 @@ const Register = () => {
 
 export default Register;
 
-// TODO : Work on design
+

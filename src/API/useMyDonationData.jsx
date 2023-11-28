@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "./useAxiosPublic";
 import { useContext } from "react";
 import { SecurityContext } from "../Provider/SecurityProvider";
+import useAxiosSecure from "./useAxiosSecure";
 
 const useMyDonationData = () => {
   const { user, loading } = useContext(SecurityContext);
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const {
     refetch,
@@ -15,7 +15,7 @@ const useMyDonationData = () => {
     queryKey: [user?.email, "mydonationData"],
     enabled: !loading,
     queryFn: async () => {
-      const res = await axiosPublic.get(
+      const res = await axiosSecure.get(
         `/mydonationrequest?email=${user.email}`
       );
       return res.data.data;

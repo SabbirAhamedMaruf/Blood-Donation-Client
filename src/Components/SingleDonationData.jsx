@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-
 const SingleDonationData = ({
   showDeleteModal,
   setShowDeleteModal,
@@ -127,7 +126,7 @@ const SingleDonationData = ({
                     <div className="flex justify-center gap-10">
                       <button
                         onClick={() =>
-                          handleUpdateDonationStatus(data._id,"done")
+                          handleUpdateDonationStatus(data._id, "done")
                         }
                         className="px-4 py-2 bg-orange-300 rounded-md outline-none text-white font-semibold  text-xl duration-700 hover:bg-green-300"
                       >
@@ -135,7 +134,7 @@ const SingleDonationData = ({
                       </button>
                       <button
                         onClick={() =>
-                          handleUpdateDonationStatus(data._id,"Canceled")
+                          handleUpdateDonationStatus(data._id, "Canceled")
                         }
                         className="px-4 py-2 bg-orange-300 rounded-md outline-none text-white font-semibold  text-xl duration-700 hover:bg-green-300"
                       >
@@ -167,10 +166,10 @@ const SingleDonationData = ({
 SingleDonationData.propTypes = {
   showDeleteModal: PropTypes.bool,
   setShowDeleteModal: PropTypes.func,
-  showChangeStatusModal:PropTypes.bool,
-  setShowChangeStatusModal:PropTypes.func,
+  showChangeStatusModal: PropTypes.bool,
+  setShowChangeStatusModal: PropTypes.func,
   handleDeleteDonationData: PropTypes.func,
-  handleUpdateDonationStatus:PropTypes.func,
+  handleUpdateDonationStatus: PropTypes.func,
   number: PropTypes.number,
   data: PropTypes.object,
 };

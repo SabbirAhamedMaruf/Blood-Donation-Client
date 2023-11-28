@@ -11,7 +11,6 @@ const Navbar = () => {
   const [userType] = useUserType();
   // getting user data
   const { user, handleSignOut } = useContext(SecurityContext);
-  console.log(user);
   return (
     <div className="px-2 md:px-10 lg:py-2 font-bold  w-full ">
       <div className="navbar">
@@ -79,12 +78,12 @@ const Navbar = () => {
 
             {userType === "admin" ? (
               <>
-                <NavLink to="/dashboard/adminprofile">Dashboard</NavLink>
+                <NavLink to="/dashboard/adminhome">Dashboard</NavLink>
               </>
             ) : userType === "donor" ? (
-              <NavLink to="/dashboard/donorprofile">Dashboard</NavLink>
+              <NavLink to="/dashboard/donorhome">Dashboard</NavLink>
             ) : userType === "volunteer" ? (
-              <NavLink to="/dashboard/volunteerprofile">Dashboard</NavLink>
+              <NavLink to="/dashboard/volunteerhome">Dashboard</NavLink>
             ) : (
               <></>
             )}

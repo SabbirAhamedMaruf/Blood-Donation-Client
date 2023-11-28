@@ -3,11 +3,15 @@ import useAxiosPublic from "../../../API/useAxiosPublic";
 import useDistrictsData from "../../../API/useDistrictsData";
 import { useNavigate, useParams } from "react-router-dom";
 import { NotificationContext } from "../../../hooks/Notification";
+import { SecurityContext } from "../../../Provider/SecurityProvider";
+import useAxiosSecure from "../../../API/useAxiosSecure";
 
 const UpdateDonationData = () => {
+  const {user}=useContext(SecurityContext);
   const { handleSuccessToast, handleErrorToast } =
     useContext(NotificationContext);
   const axiosPublic = useAxiosPublic();
+  const axiosSecure= useAxiosSecure();
   const [districtData] = useDistrictsData();
   const [upazilaData, setUpazilaData] = useState([]);
   const navigate = useNavigate();
@@ -24,12 +28,16 @@ const UpdateDonationData = () => {
     donationdate,
     requestmessage,
   } = currentDonationData;
+
+
   // getting donation data
   useEffect(() => {
-    axiosPublic
-      .get(`/getsingledonationdata?donationDataId=${params.id}`)
+    axiosSecure
+      .get(`/getsingledonationdata?donationDataId=${params.id}&email=${user.email}`)
       .then((res) => setCurrentDonationData(res.data.data));
-  }, [axiosPublic, params.id, setCurrentDonationData]);
+  }, [axiosSecure, params.id, setCurrentDonationData,user.email]);
+
+
 
   // getting upazila data based on districts
   const handleGetUpazilas = (e) => {
@@ -83,9 +91,9 @@ const UpdateDonationData = () => {
         requestmessage: currentrequestmessage,
       };
 
-      axiosPublic
+      axiosSecure
         .patch(
-          `/updatedonationrequestsdata?donationDataId=${params.id}`,
+          `/updatedonationrequestsdata?donationDataId=${params.id}&email=${user.email}`,
           donationRequest
         )
         .then((res) => {

@@ -1,27 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "./useAxiosPublic";
 import { useContext } from "react";
 import { SecurityContext } from "../Provider/SecurityProvider";
-
-
+import useAxiosPublic from "./useAxiosPublic";
 
 const useUserType = () => {
-  const {user,loading} = useContext(SecurityContext)
+  const { user, loading } = useContext(SecurityContext);
   const axiosPublic = useAxiosPublic();
 
-  const {data:userType, isPending: isUserTypeLoading}= useQuery({
-    queryKey : [user?.email,"userType"],
+  const { data: userType, isPending: isUserTypeLoading } = useQuery({
+    queryKey: ["userType", user?.email],
     enabled: !loading,
-    queryFn: async()=>{
+    queryFn: async () => {
       const res = await axiosPublic.get(`/user/dashboard?email=${user.email}`);
-      console.log(res);
-      return res.data?.data.userType
-    }
-  })
+      return res.data?.data.userType;
+    },
+  });
   // if(isUserTypeLoading) return "Loading"
-  return [userType,isUserTypeLoading];
+  return [userType, isUserTypeLoading];
 };
-
 
 export default useUserType;
 
+// TODO : test to get usertype with axios secure

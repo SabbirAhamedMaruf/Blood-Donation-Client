@@ -1,10 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import useAxiosPublic from "../../../API/useAxiosPublic";
 import { useNavigate, useParams } from "react-router-dom";
 import useUserData from "../../../API/useUserData";
 import { NotificationContext } from "../../../hooks/Notification";
+import useAxiosSecure from "../../../API/useAxiosSecure";
+import { SecurityContext } from "../../../Provider/SecurityProvider";
 
 const ViewDonationDetails = () => {
+  const {user}=useContext(SecurityContext);
   const { handleSuccessToast, handleErrorToast } =
     useContext(NotificationContext);
   const [, userData] = useUserData();
@@ -12,7 +14,7 @@ const ViewDonationDetails = () => {
   const [currentDonationData, setCurrentDonationData] = useState([]);
   const params = useParams();
   const navigate = useNavigate();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const {
     requestername,
     requesteremail,
@@ -28,10 +30,10 @@ const ViewDonationDetails = () => {
   } = currentDonationData;
   // getting donation data
   useEffect(() => {
-    axiosPublic
-      .get(`/getsingledonationdata?donationDataId=${params.id}`)
+    axiosSecure
+      .get(`/getsingledonationdata?donationDataId=${params.id}&email=${user.email}`)
       .then((res) => setCurrentDonationData(res.data.data));
-  }, [axiosPublic, params.id, setCurrentDonationData]);
+  }, [axiosSecure, params.id, setCurrentDonationData,user.email]);
 
   //   Donating blood accpetance api
   const handleDonate = (donationId) => {
@@ -40,7 +42,7 @@ const ViewDonationDetails = () => {
       donoremail: userData.email,
       status: "inprogress",
     };
-    axiosPublic
+    axiosSecure
       .patch(`/donateblood?donationDataId=${donationId}`, updateDonorInfo)
       .then((res) => {
         if (res.data.data.acknowledged) {

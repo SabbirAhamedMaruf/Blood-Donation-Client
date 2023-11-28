@@ -1,48 +1,43 @@
 import { useContext, useEffect, useState } from "react";
 import SingleDonationData from "../../../Components/SingleDonationData";
 import { NotificationContext } from "../../../hooks/Notification";
-import useAxiosPublic from "../../../API/useAxiosPublic";
 import useMyDonationData from "../../../API/useMyDonationData";
-import "../../../index.css"
+import "../../../index.css";
 import { SecurityContext } from "../../../Provider/SecurityProvider";
+import useAxiosSecure from "../../../API/useAxiosSecure";
 
 const DonorDonation = () => {
-  const {user}=useContext(SecurityContext);
+  const { user } = useContext(SecurityContext);
+  const [handleRefech,setHandleRefetch]=useState(true);
   const { handleSuccessToast, handleErrorToast } =
     useContext(NotificationContext);
   const [mydonationData, refetch] = useMyDonationData();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure=useAxiosSecure()
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showChangeStatusModal, setShowChangeStatusModal] = useState(false);
 
   // pagination concept
-  const [paginationDataHolder, setPaginationDataHolder]=useState([])
-  const [catagory,setCatagory]=useState("pending");
-  const [currentPage,setCurrentPage]=useState(0);
+  const [paginationDataHolder, setPaginationDataHolder] = useState([]);
+  const [catagory, setCatagory] = useState("pending");
+  const [currentPage, setCurrentPage] = useState(0);
   let itemsperpage = 3;
   const numebrOfPages = Math.ceil(mydonationData.length / itemsperpage);
   const pages = [...Array(numebrOfPages).keys()];
-  // fetching data using pagination
-  useEffect(()=>{
-    axiosPublic.get(`/fetchdatabypagination?email=${user.email}&currentpage=${currentPage}&catagory=${catagory}`)
-    .then(res=> setPaginationDataHolder(res.data.data))
-  },[axiosPublic,currentPage,user.email,catagory])
 
-  const handleChangeCatagory=(e)=>{
+  const handleChangeCatagory = (e) => {
     e.preventDefault();
     setCatagory(e.target.value);
-  }
+  };
 
-  
   // deleteing donation request
   const handleDeleteDonationData = (donationId) => {
-    axiosPublic
-      .delete(`/deletedonationrequestsdata?donationId=${donationId}`)
+    axiosSecure
+      .delete(`/deletedonationrequestsdata?email=${user.email}&donationId=${donationId}`)
       .then((res) => {
-        console.log(res.data);
         if (res.data.data.acknowledged) {
           handleSuccessToast("Donation request deleted successfully!");
           setShowDeleteModal(false);
+          setHandleRefetch(!handleRefech);
           refetch();
         } else {
           handleErrorToast(
@@ -54,30 +49,39 @@ const DonorDonation = () => {
 
   // update donation status
   const handleUpdateDonationStatus = (donationId, status) => {
-    console.log(donationId, status);
-    axiosPublic
-      .patch(`/confrimdonation?donationId=${donationId}&status=${status}`)
+    axiosSecure
+      .patch(`/confrimdonation?donationId=${donationId}&status=${status}&email=${user.email}`)
       .then((res) => {
-        console.log(res.data);
         if (res.data.data.acknowledged) {
-          handleSuccessToast("Donation request deleted successfully!");
+          handleSuccessToast("Donation request updated successfully!");
           setShowDeleteModal(false);
+          setHandleRefetch(!handleRefech);
           refetch();
         } else {
           handleErrorToast(
-            "An error occured during deletion donation request!"
+            "An error occured during updating request!"
           );
         }
       });
   };
 
+
+    // fetching data using pagination
+    useEffect(() => {
+      axiosSecure
+        .get(
+          `/fetchdatabypagination?email=${user.email}&currentpage=${currentPage}&catagory=${catagory}`
+        )
+        .then((res) => setPaginationDataHolder(res.data.data));
+    }, [axiosSecure, currentPage, user.email, catagory,handleRefech]);
+
   return (
-    <div>
-      <div className="w-[90%] h-[100vh] lg:h-[80vh] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">
-        <div>
-          <h1 className="h-1/4 text-center text-xl md:text-2xl lg:text-4xl font-semibold my-10">
-            Your donation list
-          </h1>
+    <div className="w-[90%] h-[100vh] lg:h-[80vh] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">
+      <h1 className="text-center text-xl md:text-2xl lg:text-4xl font-semibold ">
+        Your donation list
+      </h1>
+      <div className="flex flex-col">
+        <div className="h-[500px]">
           {mydonationData.length === 0 ? (
             <h1 className="text-xl md:text-2xl lg:text-3xl text-red-500 font-semibold text-center mt-60">
               Not donation request found
@@ -153,23 +157,24 @@ const DonorDonation = () => {
                   </tfoot>
                 </table>
               </div>
-              {/* pagination */}
-              <div className="pagination mt-10 ml-5">
-                <span className="text-xl font-semibold">Pages: </span>
-                {pages.map((i, idx) => (
-                  <button
-                    onClick={()=>setCurrentPage(i)}
-                    className={currentPage === i && 'selected'}
-                    // className="mr-5 px-3 py-1  text-white rounded-md"
-                    key={idx}
-                  >
-                    {i}
-                  </button>
-                ))}
-              </div>
-            
             </div>
           )}
+        </div>
+        <div className="row-span-1">
+          {/* pagination */}
+          <div className="pagination  mt-10 ml-5">
+            <span className="text-xl font-semibold">Pages: </span>
+            {pages.map((i, idx) => (
+              <button
+                onClick={() => setCurrentPage(i)}
+                className={currentPage === i && "selected"}
+                // className="mr-5 px-3 py-1  text-white rounded-md"
+                key={idx}
+              >
+                {i}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -177,3 +182,5 @@ const DonorDonation = () => {
 };
 
 export default DonorDonation;
+
+

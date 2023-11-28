@@ -3,13 +3,14 @@ import axios from "axios";
 import useUserData from "../../../API/useUserData";
 import profileUpdatebanner from "../../../assets/profileUpdate.jpg";
 import useDistrictsData from "../../../API/useDistrictsData";
-import useAxiosPublic from "../../../API/useAxiosPublic";
 import { MdExitToApp } from "react-icons/md";
 import { NotificationContext } from "../../../hooks/Notification";
+import useAxiosSecure from "../../../API/useAxiosSecure";
+import useAxiosPublic from "../../../API/useAxiosPublic";
 const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${
   import.meta.env.VITE_IMAGEBB_API
 }`;
-const DonorProfile = () => {
+const Profile = () => {
   const { handleSuccessToast, handleErrorToast } =
     useContext(NotificationContext);
   const [upazilaData, setUpazilaData] = useState([]);
@@ -17,6 +18,7 @@ const DonorProfile = () => {
   const [refetch,userData] = useUserData();
   const [open, setOpen] = useState(false);
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   // getting upazila data based on districts
   const handleGetUpazilas = (e) => {
@@ -34,6 +36,8 @@ const DonorProfile = () => {
     const userDistrict = form.district.value;
     const userUpazila = form.upazila.value;
     const userBloodGroup = form.bloodgroup.value;
+
+
     // getting image data
     const formData = new FormData();
     formData.append("image", form.photo.files[0]);
@@ -45,10 +49,9 @@ const DonorProfile = () => {
       upazila: userUpazila,
       bloodgroup: userBloodGroup,
     };
-    await axiosPublic
+    await axiosSecure
       .post(`/user/updateProfile/${userData._id}`, updatedUserData)
       .then((res) => {
-        console.log(res.data.data);
         if (res.data.data.acknowledged) {
           handleSuccessToast("User updated successfully!");
           setOpen(false);
@@ -115,7 +118,6 @@ const DonorProfile = () => {
                             className="py-2 px-2 col-span-2 md:col-span-3 lg:col-span-5   border-none bg-red-50"
                             name="photo"
                             accept=".png, .jpg, .jpeg"
-                            required
                           />
                         </div>
 
@@ -236,7 +238,7 @@ const DonorProfile = () => {
   );
 };
 
-export default DonorProfile;
+export default Profile;
 
 
 

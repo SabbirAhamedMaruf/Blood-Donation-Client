@@ -3,11 +3,15 @@ import useDistrictsData from "../../../API/useDistrictsData";
 import useUserData from "../../../API/useUserData";
 import useAxiosPublic from "../../../API/useAxiosPublic";
 import { NotificationContext } from "../../../hooks/Notification";
+import useAxiosSecure from "../../../API/useAxiosSecure";
+import { SecurityContext } from "../../../Provider/SecurityProvider";
 
 const DonorCreateDonation = () => {
+  const {user} = useContext(SecurityContext);
   const { handleSuccessToast, handleErrorToast } =
     useContext(NotificationContext);
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const [, userData] = useUserData();
   const [districtData] = useDistrictsData();
   const [upazilaData, setUpazilaData] = useState([]);
@@ -23,7 +27,6 @@ const DonorCreateDonation = () => {
 
   const handleCreateDonationRequest = (e) => {
     e.preventDefault();
-
     if (userData.status === "active") {
       const form = e.target;
       const currentrequestername = form.requestername.value;
@@ -71,8 +74,8 @@ const DonorCreateDonation = () => {
           donoremail:"null",
           status,
         };
-        axiosPublic
-          .post("/createdonationrequests", donationRequest)
+        axiosSecure
+          .post(`/createdonationrequests?email=${user.email}`, donationRequest)
           .then((res) => {
             if (res.data.success) {
               handleSuccessToast("Donation request created successfully!");

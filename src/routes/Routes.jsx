@@ -6,15 +6,15 @@ import Login from "../pages/Security/Login";
 import Register from "../pages/Security/Register";
 import Dashboard from "../layouts/Dashboard";
 import PrivateRoutes from "./PrivateRoutes";
-import AdminProfile from "../pages/Dashboard/Admin/AdminProfile";
-import VolunteerProfile from "../pages/Dashboard/Volunteer/VolunteerProfile";
-import DonorProfile from "../pages/Dashboard/Donor/DonorProfile";
 import DonorHome from "../pages/Dashboard/Donor/DonorHome";
 import DonorCreateDonation from "../pages/Dashboard/Donor/DonorCreateDonation";
 import DonorDonation from "../pages/Dashboard/Donor/DonorDonation";
 import UpdateDonationData from "../pages/Dashboard/Donor/UpdateDonationData";
 import DonorFundForOrganization from "../pages/Dashboard/Donor/DonorFundForOrganization";
 import ViewDonationDetails from "../pages/Dashboard/Donor/ViewDonationDetails";
+import Profile from "../pages/Dashboard/Shared/Profile";
+import AdminHome from "../pages/Dashboard/Admin/AdminHome";
+import VolunteerHome from "../pages/Dashboard/Volunteer/VolunteerHome";
 
 
 const routes = createBrowserRouter([
@@ -44,18 +44,26 @@ const routes = createBrowserRouter([
     path:"/dashboard",
     element:<PrivateRoutes><Dashboard/></PrivateRoutes>,
     children:[
+      // Shared Rotues
+      {
+        path:"/dashboard/profile",
+        element:<PrivateRoutes><Profile/></PrivateRoutes>
+      },
+
+
+
       // Admin Routes
       {
-        path:"/dashboard/adminprofile",
-        element:<PrivateRoutes><AdminProfile/></PrivateRoutes>
+        path:"/dashboard/adminhome",
+        element: <PrivateRoutes><AdminHome/></PrivateRoutes>
       },
+
+
+
+
 
 
       // Donor Routes
-      {
-        path:"/dashboard/donorprofile",
-        element:<PrivateRoutes><DonorProfile/></PrivateRoutes>
-      },
       {
         path:"/dashboard/donorhome",
         element: <PrivateRoutes><DonorHome/></PrivateRoutes>
@@ -83,8 +91,8 @@ const routes = createBrowserRouter([
       
       // Volunteer Routes
       {
-        path: "/dashboard/volunteerprofile",
-        element:<PrivateRoutes><VolunteerProfile/></PrivateRoutes>
+        path: "/dashboard/volunteerhome",
+        element:<PrivateRoutes><VolunteerHome/></PrivateRoutes>
       }
     ]
   }

@@ -3,26 +3,29 @@ import useDonorDonationData from "../../../API/useDonorDonationData";
 import useUserData from "../../../API/useUserData";
 import SingleDonationData from "../../../Components/SingleDonationData"; 
 import { NotificationContext } from "../../../hooks/Notification";
-import useAxiosPublic from "../../../API/useAxiosPublic";
 import { Link } from "react-router-dom";
+import { SecurityContext } from "../../../Provider/SecurityProvider";
+import useAxiosSecure from "../../../API/useAxiosSecure";
 const DonorHome = () => {
+  const {user}=useContext(SecurityContext);
   const { handleSuccessToast, handleErrorToast } =
     useContext(NotificationContext);
   const [, userData] = useUserData();
+  const [handleRefech,setHandleRefetch]=useState(true);
   const [donorDonationData, refetch] = useDonorDonationData();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showChangeStatusModal, setShowChangeStatusModal] = useState(false);
 
   // deleteing donation request
   const handleDeleteDonationData = (donationId) => {
-    axiosPublic
-      .delete(`/deletedonationrequestsdata?donationId=${donationId}`)
+    axiosSecure
+      .delete(`/deletedonationrequestsdata?donationId=${donationId}&email=${user.email}`)
       .then((res) => {
-        console.log(res.data);
         if (res.data.data.acknowledged) {
           handleSuccessToast("Donation request deleted successfully!");
           setShowDeleteModal(false);
+          setHandleRefetch(!handleRefech);
           refetch();
         } else {
           handleErrorToast(
@@ -34,18 +37,17 @@ const DonorHome = () => {
 
   // update donation status
   const handleUpdateDonationStatus = (donationId, status) => {
-    console.log(donationId, status);
-    axiosPublic
-      .patch(`/confrimdonation?donationId=${donationId}&status=${status}`)
+    axiosSecure
+      .patch(`/confrimdonation?donationId=${donationId}&status=${status}&email=${user.email}`)
       .then((res) => {
-        console.log(res.data);
         if (res.data.data.acknowledged) {
-          handleSuccessToast("Donation request deleted successfully!");
-          setShowDeleteModal(false);
+          handleSuccessToast("Donation request updated successfully!");
+          setShowChangeStatusModal(false);
+          setHandleRefetch(!handleRefech);
           refetch();
         } else {
           handleErrorToast(
-            "An error occured during deletion donation request!"
+            "An error occured during updating donation request!"
           );
         }
       });

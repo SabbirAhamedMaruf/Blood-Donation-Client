@@ -1,26 +1,29 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "./useAxiosPublic";
 import { useContext } from "react";
 import { SecurityContext } from "../Provider/SecurityProvider";
+import useAxiosSecure from "./useAxiosSecure";
 
 
 
 const useUserData = () => {
-  const {user,loading} = useContext(SecurityContext)
-  const axiosPublic = useAxiosPublic();
+  const {user,loading} = useContext(SecurityContext);
+  const axiosSecure = useAxiosSecure();
+ 
 
   const {refetch,data:userData={}, isPending: isUserTypeLoading}= useQuery({
     queryKey : [user?.email,"userData"],
     enabled: !loading,
     queryFn: async()=>{
-      const res = await axiosPublic.get(`/user/dashboard?email=${user.email}`);
+      const res = await axiosSecure.get(`/user/dashboard?email=${user.email}`);
       return res.data.data
     }
   })
-  // if(isUserTypeLoading) return "Loading"
+
   return [refetch,userData,isUserTypeLoading]
 };
 
 
 export default useUserData;
+
+
 

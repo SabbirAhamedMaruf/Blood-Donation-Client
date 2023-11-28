@@ -5,10 +5,15 @@ import { useContext } from "react";
 import { SecurityContext } from "../../Provider/SecurityProvider";
 import useUserType from "../../API/useUserType";
 import "../../index.css"
+import useUserData from "../../API/useUserData";
 // import { IoMoon } from "react-icons/io5";
 
 const Navbar = () => {
   const [userType] = useUserType();
+  const [,userData]=useUserData();
+
+  console.log(userData)
+
   // getting user data
   const { user, handleSignOut } = useContext(SecurityContext);
   return (
@@ -110,7 +115,7 @@ const Navbar = () => {
             {user ? (
               <div className="dropdown">
                 <img
-                  src={user.photoURL}
+                  src={userData.photo}
                   tabIndex={0}
                   className="w-10 rounded-full"
                 />
@@ -119,7 +124,7 @@ const Navbar = () => {
                   className="text-center absolute right-0 dropdown-content mt-3 z-[1] p-2 shadow-xl rounded-box w-72 space-y-3 bg-white"
                 >
                   <div className="bg-red-500 p-5 rounded-xl text-xl text-white">
-                    <h1>{user.displayName}</h1>
+                    <h1>{userData.name}</h1>
                   </div>
                   <ul className="flex flex-col">
                     <NavLink to="/contact">Dashboard</NavLink>

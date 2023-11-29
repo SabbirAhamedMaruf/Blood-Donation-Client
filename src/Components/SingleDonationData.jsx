@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import useUserType from "../API/useUserType";
 const SingleDonationData = ({
   showDeleteModal,
   setShowDeleteModal,
@@ -10,6 +11,7 @@ const SingleDonationData = ({
   number,
   data,
 }) => {
+  const [userType] = useUserType();
   return (
     <tr>
       <th>{number + 1}</th>
@@ -64,47 +66,51 @@ const SingleDonationData = ({
         )}
       </td>
       <td>
-        <Link to={`/dashboard/update-donation-request/${data._id}`}>
-          <button className="px-2 py-1 bg-yellow-500 text-white rounded-md">
-            Edit
-          </button>
-        </Link>
+        {userType === "admin" && (
+          <Link to={`/dashboard/update-donation-request/${data._id}`}>
+            <button className="px-2 py-1 bg-yellow-500 text-white rounded-md">
+              Edit
+            </button>
+          </Link>
+        )}
       </td>
       <td>
-        <div>
-          {/* My Custom Modal */}
-          <button
-            className="px-2 py-1 bg-red-500 text-white rounded-md"
-            onClick={() => setShowDeleteModal(true)}
-          >
-            Delete
-          </button>
-          {showDeleteModal && (
-            <div>
-              <div className="fixed inset-0 bg-[rgba(22,22,22,0.8)] z-10">
-                <div className="fixed top-[35%] left-[40%] p-10 space-y-10 bg-white rounded-xl ">
-                  <h3 className="font-bold text-2xl text-left">
-                    Delete donation data?
-                  </h3>
-                  <div className="flex justify-center gap-10">
-                    <button
-                      onClick={() => handleDeleteDonationData(data._id)}
-                      className="px-4 py-2 bg-orange-300 rounded-md outline-none text-white font-semibold  text-xl duration-700 hover:bg-green-300"
-                    >
-                      Confirm
-                    </button>
-                    <button
-                      onClick={() => setShowDeleteModal(false)}
-                      className="px-4 py-2 bg-red-500 rounded-md outline-none text-white font-semibold  text-xl duration-700 hover:bg-green-300"
-                    >
-                      Cancel
-                    </button>
+        {userType === "admin" && (
+          <div>
+            {/* My Custom Modal */}
+            <button
+              className="px-2 py-1 bg-red-500 text-white rounded-md"
+              onClick={() => setShowDeleteModal(true)}
+            >
+              Delete
+            </button>
+            {showDeleteModal && (
+              <div>
+                <div className="fixed inset-0 bg-[rgba(22,22,22,0.8)] z-10">
+                  <div className="fixed top-[35%] left-[40%] p-10 space-y-10 bg-white rounded-xl ">
+                    <h3 className="font-bold text-2xl text-left">
+                      Delete donation data?
+                    </h3>
+                    <div className="flex justify-center gap-10">
+                      <button
+                        onClick={() => handleDeleteDonationData(data._id)}
+                        className="px-4 py-2 bg-orange-300 rounded-md outline-none text-white font-semibold  text-xl duration-700 hover:bg-green-300"
+                      >
+                        Confirm
+                      </button>
+                      <button
+                        onClick={() => setShowDeleteModal(false)}
+                        className="px-4 py-2 bg-red-500 rounded-md outline-none text-white font-semibold  text-xl duration-700 hover:bg-green-300"
+                      >
+                        Cancel
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
       </td>
       <td>
         {data.status === "inprogress" ? (

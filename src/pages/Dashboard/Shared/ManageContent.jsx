@@ -78,21 +78,26 @@ const ManageContent = () => {
               <h2 className="card-title">{i.title}</h2>
               <p>{i.content.replace(/<[^>]*>/g, "").slice(0, 30)}....</p>
               <div className="card-actions justify-end">
-                {i.status === "draft" ? (
-                  <button
-                    onClick={() => handleChangeBlogStatus(i._id, "publish")}
-                    className="px-4 py-1 bg-green-400 font-semibold text-white rounded-full"
-                  >
-                    Publish
-                  </button>
-                ) : (
-                  <button
-                    onClick={() => handleChangeBlogStatus(i._id, "draft")}
-                    className="px-4 py-1 bg-green-400 font-semibold text-white rounded-full"
-                  >
-                    Unpublish
-                  </button>
+                {userType === "admin" && (
+                  <>
+                    {i.status === "draft" ? (
+                      <button
+                        onClick={() => handleChangeBlogStatus(i._id, "publish")}
+                        className="px-4 py-1 bg-green-400 font-semibold text-white rounded-full"
+                      >
+                        Publish
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handleChangeBlogStatus(i._id, "draft")}
+                        className="px-4 py-1 bg-green-400 font-semibold text-white rounded-full"
+                      >
+                        Unpublish
+                      </button>
+                    )}
+                  </>
                 )}
+
                 {userType === "admin" && (
                   <button
                     onClick={() => handleDeleteBlog(i._id)}

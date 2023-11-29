@@ -61,6 +61,10 @@ const routes = createBrowserRouter([
         path:"/dashboard/content-management/add-blog",
         element: <PrivateRoutes><AddBlogs/></PrivateRoutes>
       },
+      {
+        path:"/dashboard/all-blood-donation-request",
+        element: <PrivateRoutes><AllBloodDonationPage/></PrivateRoutes>
+      },
 
 
 
@@ -74,10 +78,7 @@ const routes = createBrowserRouter([
         path:"/dashboard/all-users",
         element: <PrivateRoutes><ManageAllUsers/></PrivateRoutes>
       },
-      {
-        path:"/dashboard/all-blood-donation-request",
-        element: <PrivateRoutes><AllBloodDonationPage/></PrivateRoutes>
-      },
+
 
 
 

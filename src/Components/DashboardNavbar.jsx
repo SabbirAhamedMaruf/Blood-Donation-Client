@@ -68,8 +68,6 @@ const DashboardNavbar = () => {
                             All Blood Donations
                           </button>
                         </NavLink>
-
-
                         <NavLink to="/dashboard/content-management">
                           <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
                             Content Management
@@ -110,6 +108,16 @@ const DashboardNavbar = () => {
                         <NavLink to="/dashboard/volunteerhome">
                           <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
                             Home
+                          </button>
+                        </NavLink>
+                        <NavLink to="/dashboard/all-blood-donation-request">
+                          <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
+                            All Blood Donations
+                          </button>
+                        </NavLink>
+                        <NavLink to="/dashboard/content-management">
+                          <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
+                            Content Management
                           </button>
                         </NavLink>
                       </ul>

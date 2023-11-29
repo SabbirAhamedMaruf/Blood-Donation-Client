@@ -69,12 +69,14 @@ const DashboardNavbar = () => {
                           </button>
                         </NavLink>
 
-                        
-                        <NavLink to="/dashboard/all-blood-donation-request">
+
+                        <NavLink to="/dashboard/content-management">
                           <button className="w-full py-2 rounded-full text-black transition-all duration-300 hover:text-white hover:bg-red-500">
-                            All Blood Donations
+                            Content Management
                           </button>
                         </NavLink>
+
+
                       </ul>
                     ) : // user routes
 

@@ -46,7 +46,7 @@ const SearchDonors = () => {
   return (
     <div>
       <div className="w-[90%] lg:h-[80vh] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl  ">
-        <h1 className="text-center font-bold text-xl md:text-2xl lg:text-4xl">
+        <h1 className="text-center font-semibold text-xl md:text-2xl lg:text-4xl">
           Search Donors
         </h1>
         <div className="flex flex-col lg:flex-row gap-5 p-5">

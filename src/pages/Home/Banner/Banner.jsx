@@ -74,12 +74,12 @@ const Banner = () => {
           </div>
 
           <div className="flex justify-center gap-2 lg:gap-10 z-10">
-            <Link>
+            <Link to="/register">
               <button className="md:px-2 md:py-1 lg:px-6 lg:py-2 bg-red-500 text-white rounded-full lg:text-[18px]">
                 Join as donor
               </button>
             </Link>
-            <Link>
+            <Link to="/search-donors">
               <button className="md:px-2 md:py-1 lg:px-6 lg:py-2 bg-black text-white rounded-full lg:text-[18px]">
                 Search Donors
               </button>

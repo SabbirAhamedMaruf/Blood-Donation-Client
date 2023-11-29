@@ -11,9 +11,11 @@ const Blogs = () => {
       .then((res) => setAllBlogs(res.data.data));
   }, [axiosPublic]);
   return (
-    <div className="w-[90%] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">
+    <div className="w-[90%] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl ">
       <div className="h-1/4 text-center text-xl md:text-2xl lg:text-2xl font-semibold mb-10">
-        <h1>Blogs</h1>
+        <h1 className="text-center font-semibold text-xl md:text-2xl lg:text-4xl ">
+          Blogs
+        </h1>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 my-10">
         {allBlogs.map((i) => (

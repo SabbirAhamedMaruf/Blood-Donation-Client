@@ -14,9 +14,9 @@ const DonationRequest = () => {
   console.log(pendingDonationRequest);
   return (
     <div>
-      <div className="w-[90%] h-[100vh] lg:h-[80vh] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">
+      <div className="w-[90%] h-[100vh] lg:h-[80vh] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl ">
         <div>
-          <h1 className="h-1/4 text-center text-xl md:text-2xl lg:text-2xl font-semibold my-10">
+          <h1 className="text-center font-semibold text-xl md:text-2xl lg:text-4xl ">
             Blood donation request
           </h1>
           {pendingDonationRequest.length === 0 ? (
@@ -45,7 +45,6 @@ const DonationRequest = () => {
                         data={i}
                       ></SingleDonationRequestPageData>
                     ))}
-                    
                   </tbody>
                   <tfoot>
                     <tr>

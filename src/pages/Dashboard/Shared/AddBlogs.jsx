@@ -4,18 +4,20 @@ import useAxiosSecure from "../../../API/useAxiosSecure";
 import axios from "axios";
 import { SecurityContext } from "../../../Provider/SecurityProvider";
 import { NotificationContext } from "../../../hooks/Notification";
+import useUserData from "../../../API/useUserData";
 
 const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${
   import.meta.env.VITE_IMAGEBB_API
 }`;
 
 const AddBlogs = () => {
-    const { handleSuccessToast, handleErrorToast } =
+  const { handleSuccessToast, handleErrorToast } =
     useContext(NotificationContext);
-    const {user}=useContext(SecurityContext)
+  const { user } = useContext(SecurityContext);
   const axiosSecure = useAxiosSecure();
   const editor = useRef(null);
   const [content, setContent] = useState("");
+  const [,userData]=useUserData();
 
   const handleAddBlogPost = async (e) => {
     e.preventDefault();
@@ -33,21 +35,23 @@ const AddBlogs = () => {
     const blogData = {
       title: currentTitle,
       photo: response.data.data.display_url,
-      email:user.email,
+      name: userData.name,
+      email: userData.email,
+      avatar: userData.photo,
       content: currentContent,
       status: "draft",
     };
-  
-    await axiosSecure.post(`/add-my-blog?email=${user.email}`,blogData)
-    .then(res=>{
-        if(res.data.success){
-            handleSuccessToast("Blog content added successfully!");
-            form.reset();
-        }else{
-            handleErrorToast("An error occured during connection!")
-        }
-    })
 
+    await axiosSecure
+      .post(`/add-my-blog?email=${user.email}`, blogData)
+      .then((res) => {
+        if (res.data.success) {
+          handleSuccessToast("Blog content added successfully!");
+          form.reset();
+        } else {
+          handleErrorToast("An error occured during connection!");
+        }
+      });
   };
 
   return (

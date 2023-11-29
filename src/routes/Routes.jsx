@@ -20,6 +20,8 @@ import AllBloodDonationPage from "../pages/Dashboard/Admin/AllBloodDonationPage"
 import AddBlogs from "../pages/Dashboard/Shared/AddBlogs";
 import ManageContent from "../pages/Dashboard/Shared/ManageContent";
 import DonationRequest from "../pages/DonationRequest/DonationRequest";
+import Blogs from "../pages/Blogs/Blogs";
+import ViewBlogDetails from "../pages/Blogs/ViewBlogDetails";
 
 
 const routes = createBrowserRouter([
@@ -44,6 +46,14 @@ const routes = createBrowserRouter([
       {
         path:"/donation-request",
         element:<DonationRequest/>
+      },
+      {
+        path:"/blogs",
+        element:<Blogs/>
+      },
+      {
+        path:"/blogs/:id",
+        element:<ViewBlogDetails/>
       },
     ],
   },

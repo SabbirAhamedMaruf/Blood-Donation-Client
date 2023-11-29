@@ -40,8 +40,7 @@ const ManageContent = () => {
       .then((res) => setAllBlogs(res.data.data));
   }, [axiosPublic, blogType, refetch]);
 
-  let test = "This is an example string with several words.";
-  console.log(test.slice(0, 30));
+
 
   return (
     <div className="w-[90%] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">

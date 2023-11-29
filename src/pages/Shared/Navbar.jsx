@@ -52,7 +52,7 @@ const Navbar = () => {
                   </div>
                   <ul className="navmenu text-[13px] md:text-[18px] flex flex-col text-center">
                     <NavLink to="/">Home</NavLink>
-                    <NavLink to="/menu">Blog</NavLink>
+                    <NavLink to="/blogs">Blog</NavLink>
                     <NavLink to="/contact">Donation Request</NavLink>
                     <NavLink to="/dashboard/userprofile">Dashboard</NavLink>
                     <NavLink to="/contact">Fundings</NavLink>
@@ -77,7 +77,7 @@ const Navbar = () => {
           {/* Desktop menu */}
           <ul className="navmenu hidden lg:flex nav menu menu-horizontal text-[18px] space-x-5">
             <NavLink to="/">Home</NavLink>
-            <NavLink to="/menu">Blog</NavLink>
+            <NavLink to="/blogs">Blog</NavLink>
             <NavLink to="/donation-request">Donation Request</NavLink>
             {/* Condition redering */}
 

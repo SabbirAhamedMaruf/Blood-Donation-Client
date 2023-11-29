@@ -4,15 +4,15 @@ import { FaSun } from "react-icons/fa6";
 import { useContext } from "react";
 import { SecurityContext } from "../../Provider/SecurityProvider";
 import useUserType from "../../API/useUserType";
-import "../../index.css"
+import "../../index.css";
 import useUserData from "../../API/useUserData";
 // import { IoMoon } from "react-icons/io5";
 
 const Navbar = () => {
   const [userType] = useUserType();
-  const [,userData]=useUserData();
+  const [, userData] = useUserData();
 
-  console.log(userData)
+  console.log(userData);
 
   // getting user data
   const { user, handleSignOut } = useContext(SecurityContext);
@@ -44,16 +44,20 @@ const Navbar = () => {
             >
               {user ? (
                 <>
-                  <div className="flex items-center gap-2 bg-red-500 p-3 rounded-xl text-xl text-white">
+                  <div className="flex  justify-around items-center gap-2 bg-red-500 p-3 rounded-xl text-xl text-white">
                     <h1 className="text-[13px] md:text-[18px]">
-                      {user.displayName}
+                      {userData.name}
                     </h1>
-                    <img src={user.photoURL} className="w-14 rounded-full" />
+                    <img
+                      src={userData.photo}
+                      className="w-10 md:w-14 rounded-full"
+                    />
                   </div>
                   <ul className="navmenu text-[13px] md:text-[18px] flex flex-col text-center">
                     <NavLink to="/">Home</NavLink>
                     <NavLink to="/blogs">Blog</NavLink>
                     <NavLink to="/contact">Donation Request</NavLink>
+                    <NavLink to="/search-donors">Search Donors</NavLink>
                     <NavLink to="/dashboard/userprofile">Dashboard</NavLink>
                     <NavLink to="/contact">Fundings</NavLink>
                   </ul>
@@ -65,10 +69,11 @@ const Navbar = () => {
                   </button>
                 </>
               ) : (
-                <ul className="z-10 text-[13px] md:text-[18px]">
+                <ul className="navmenu flex flex-col text-left z-10 text-[13px] md:text-[18px]">
                   <NavLink to="/">Home</NavLink>
                   <NavLink to="/menu">Blog</NavLink>
                   <NavLink to="/contact">Donation Request</NavLink>
+                  <NavLink to="/search-donors">Search Donors</NavLink>
                 </ul>
               )}
             </div>
@@ -79,6 +84,7 @@ const Navbar = () => {
             <NavLink to="/">Home</NavLink>
             <NavLink to="/blogs">Blog</NavLink>
             <NavLink to="/donation-request">Donation Request</NavLink>
+            <NavLink to="/search-donors">Search Donors</NavLink>
             {/* Condition redering */}
 
             {userType === "admin" ? (

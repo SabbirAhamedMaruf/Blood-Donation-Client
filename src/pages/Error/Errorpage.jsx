@@ -1,6 +1,5 @@
-
 import errorLogo from "../../assets/errorlogo.jpg";
-import {  useRouteError } from "react-router-dom";
+import { Link, useRouteError } from "react-router-dom";
 import Navbar from "../Shared/Navbar";
 
 const Errorpage = () => {
@@ -24,7 +23,11 @@ const Errorpage = () => {
             )}
           </div>
           <div className="relative mt-4 m-auto">
-            <button  className="inline py-2 px-4 w-max  font-semibold text-white  bg-red-500 rounded-full">Find Home</button>
+            <Link to="/">
+              <button className="inline py-2 px-4 w-max  font-semibold text-white  bg-red-500 rounded-full">
+                Find Home
+              </button>
+            </Link>
           </div>
         </div>
       </div>

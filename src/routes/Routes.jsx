@@ -22,6 +22,7 @@ import ManageContent from "../pages/Dashboard/Shared/ManageContent";
 import DonationRequest from "../pages/DonationRequest/DonationRequest";
 import Blogs from "../pages/Blogs/Blogs";
 import ViewBlogDetails from "../pages/Blogs/ViewBlogDetails";
+import SearchDonors from "../pages/SearchDonors/SearchDonors";
 
 
 const routes = createBrowserRouter([
@@ -54,6 +55,10 @@ const routes = createBrowserRouter([
       {
         path:"/blogs/:id",
         element:<ViewBlogDetails/>
+      },
+      {
+        path:"/search-donors",
+        element:<SearchDonors/>
       },
     ],
   },

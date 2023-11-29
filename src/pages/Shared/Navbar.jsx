@@ -78,7 +78,7 @@ const Navbar = () => {
           <ul className="navmenu hidden lg:flex nav menu menu-horizontal text-[18px] space-x-5">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/menu">Blog</NavLink>
-            <NavLink to="/contact">Donation Request</NavLink>
+            <NavLink to="/donation-request">Donation Request</NavLink>
             {/* Condition redering */}
 
             {userType === "admin" ? (

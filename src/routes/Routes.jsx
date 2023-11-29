@@ -19,6 +19,7 @@ import ManageAllUsers from "../pages/Dashboard/Admin/ManageAllUsers";
 import AllBloodDonationPage from "../pages/Dashboard/Admin/AllBloodDonationPage";
 import AddBlogs from "../pages/Dashboard/Shared/AddBlogs";
 import ManageContent from "../pages/Dashboard/Shared/ManageContent";
+import DonationRequest from "../pages/DonationRequest/DonationRequest";
 
 
 const routes = createBrowserRouter([
@@ -39,7 +40,11 @@ const routes = createBrowserRouter([
       {
         path:"/register",
         element:<Register/>
-      }
+      },
+      {
+        path:"/donation-request",
+        element:<DonationRequest/>
+      },
     ],
   },
 

@@ -1,17 +1,16 @@
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
-import { FaSun } from "react-icons/fa6";
 import { useContext } from "react";
 import { SecurityContext } from "../../Provider/SecurityProvider";
 import useUserType from "../../API/useUserType";
 import "../../index.css";
 import useUserData from "../../API/useUserData";
-// import { IoMoon } from "react-icons/io5";
+
+
 
 const Navbar = () => {
   const [userType] = useUserType();
   const [, userData] = useUserData();
-
   console.log(userData);
 
   // getting user data
@@ -107,10 +106,6 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end gap-5">
-          <button>
-            <FaSun className="text-3xl md:text-[18px] p-2 md:p-0 bg-red-500 md:bg-transparent text-white md:text-black rounded-full md:rounded-none" />
-          </button>
-
           <div className="hidden lg:block">
             {user ? (
               <div className="dropdown">
@@ -134,7 +129,9 @@ const Navbar = () => {
                     ) : userType === "donor" ? (
                       <>
                         <NavLink to="/dashboard/donorhome">Dashboard</NavLink>{" "}
-                        <NavLink to="/dashboard/donorfundfororganization">Fundings</NavLink>
+                        <NavLink to="/dashboard/donorfundfororganization">
+                          Fundings
+                        </NavLink>
                       </>
                     ) : userType === "volunteer" ? (
                       <NavLink to="/dashboard/volunteerhome">Dashboard</NavLink>

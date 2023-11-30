@@ -4,24 +4,23 @@ import { useContext } from "react";
 import { SecurityContext } from "../Provider/SecurityProvider";
 import useAxiosSecure from "./useAxiosSecure";
 
-
-
 const useAdminDonationData = () => {
-  const {user,loading} = useContext(SecurityContext);
+  const { user, loading } = useContext(SecurityContext);
   const axiosSecure = useAxiosSecure();
   // const axiosPublic = useAxiosPublic();
-  const {refetch,data:adminDonationData=[], isPending: isDonorDonationLoading}= useQuery({
-    queryKey : [user?.email,"adminDonationData"],
+  const {
+    refetch,
+    data: adminDonationData = [],
+    isPending: isDonorDonationLoading,
+  } = useQuery({
+    queryKey: [user?.email, "adminDonationData"],
     enabled: !loading,
-    queryFn: async()=>{
+    queryFn: async () => {
       const res = await axiosSecure.get(`/getalldonation?email=${user.email}`);
-      return res.data.data
-    }
-  })
-  // if(isUserTypeLoading) return "Loading"
-  return [adminDonationData,refetch,isDonorDonationLoading]
+      return res.data.data;
+    },
+  });
+  return [adminDonationData, refetch, isDonorDonationLoading];
 };
 
-
 export default useAdminDonationData;
-

@@ -64,7 +64,7 @@ const DonorHome = () => {
           <Helmet>
         <title>Life Flow : Dashboard</title>
       </Helmet>
-      <div className="w-[90%] h-[100vh] lg:h-[80vh] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">
+      <div className="w-[90%] h-[85vh] lg:h-[80vh] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">
         <div>
           <h1 className="h-1/4 text-center text-xl md:text-2xl lg:text-4xl font-semibold ">
             Welcome {userData.name}
@@ -127,7 +127,7 @@ const DonorHome = () => {
           )}
 
           <Link to="/dashboard/my-donation-requests">
-            <button className="ml-[38%] md:ml-[42%] lg:ml-[1%] mt-[15%] px-4 text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-blue-500 transition-colors duration-700 hover:bg-green-500">
+            <button className="ml-[25%] md:ml-[35%] lg:ml-[1%] mt-[5%] px-4 text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-blue-500 transition-colors duration-700 hover:bg-green-500">
               View my request
             </button>
           </Link>

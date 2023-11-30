@@ -17,7 +17,8 @@ const Banner = () => {
     }, 1000);
   }, []);
   return (
-    <div data-aos="fade-up" className="w-[90vw] m-auto shadow-lg md:p-5 lg:p-10 rounded-lg lg:rounded-2xl mb-10">
+    // dark:bg-[#212538]
+    <div data-aos="fade-up" className="w-[90vw] m-auto shadow-lg md:p-5 lg:p-10 rounded-lg lg:rounded-2xl mb-10 ">
       <div className="hidden md:flex">
         {/* Slider */}
         <div className="w-1/2 flex flex-col justify-around">
@@ -37,7 +38,7 @@ const Banner = () => {
                 <h1 className="w-52 lg:w-96 md:text-3xl lg:text-7xl font-bold text-red-500">
                   Simple Act, Big Impact
                 </h1>
-                <p className="lg:text-xl w-[60%] font-semibold opacity-60">
+                <p className="lg:text-xl w-[60%] font-semibold text-gray-400 opacity-60">
                   One donation can touch multiple lives and create a ripple of
                   positivity.
                 </p>
@@ -104,7 +105,7 @@ const Banner = () => {
         </div>
         {/* Image */}
         <div className="w-1/2">
-          <img src={banner} className="md:pt-16 lg:pt-0" />
+          <img src={banner} className="md:pt-16 lg:pt-0 rounded-xl" />
         </div>
       </div>
 

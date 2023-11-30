@@ -15,10 +15,7 @@ const useUserType = () => {
       return res.data?.data.userType;
     },
   });
-  // if(isUserTypeLoading) return "Loading"
   return [userType, isUserTypeLoading];
 };
 
 export default useUserType;
-
-// TODO : test to get usertype with axios secure

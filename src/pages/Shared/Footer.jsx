@@ -4,7 +4,7 @@ import { LuInstagram } from "react-icons/lu";
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col md:flex-row justify-around  p-5 md:p-14 lg:p-20 bg-black text-white space-y-5 md:space-y-0">
+    <footer className="flex flex-col md:flex-row justify-around  p-5 md:p-14 lg:p-20 bg-black  text-white space-y-5 md:space-y-0">
       <aside>
         <img src={logo} className="w-20 lg:w-24 m-auto" />
         <p className="text-2xl lg:text-3xl font-bold py-2 text-center">

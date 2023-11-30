@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { SecurityContext } from "../Provider/SecurityProvider";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://blood-donation-server-fawn.vercel.app",
   withCredentials: true,
 });
 const useAxiosSecure = () => {
@@ -15,7 +15,7 @@ const useAxiosSecure = () => {
     function (config) {
       // getting token
       const token = localStorage.getItem("token");
-  
+
       config.headers.authorization = token;
       return config;
     },
@@ -24,21 +24,6 @@ const useAxiosSecure = () => {
     }
   );
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
   axiosSecure.interceptors.response.use(
     function (response) {
       return response;

@@ -8,10 +8,15 @@ const ContactUs = () => {
       AOS.init({ once: true });
     }, 1000);
   }, []);
+
+  const handleFormSubmit =(e)=>{
+    e.preventDefault();
+  }
+
   return (
-    <div data-aos="zoom-out" className="bg-red-500 flex flex-col-reverse md:flex-row justify-center items-center md:gap-8 lg:gap-96">
+    <div data-aos="zoom-out" className="bg-red-500  flex flex-col-reverse md:flex-row justify-center items-center md:gap-8 lg:gap-96">
       <div className="p-10">
-        <form className="p-5 lg:p-2 rounded-md flex flex-col gap-3 lg:gap-5 bg-white">
+        <form onSubmit={handleFormSubmit} className="p-5 lg:p-2 rounded-md flex flex-col gap-3 lg:gap-5 bg-white">
           <h1 className="font-bold lg:text-2xl text-center ">
             Your Information
           </h1>

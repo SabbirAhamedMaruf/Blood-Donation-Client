@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import useAxiosPublic from "../../API/useAxiosPublic";
 import { Link } from "react-router-dom";
+import {
+  FacebookShareButton,
+  WhatsappShareButton,
+  TwitterShareButton,
+} from "react-share";
+import { FacebookIcon, WhatsappIcon, TwitterIcon } from "react-share";
 
 const Blogs = () => {
   const [allBlogs, setAllBlogs] = useState([]);
@@ -17,7 +23,7 @@ const Blogs = () => {
           Blogs
         </h1>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 my-10">
+      <div className="ml-9 md:ml-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 my-10">
         {allBlogs.map((i) => (
           <div
             key={i._id}
@@ -29,7 +35,35 @@ const Blogs = () => {
             <div className="card-body">
               <h2 className="card-title">{i.title}</h2>
               <p>{i.content.replace(/<[^>]*>/g, "").slice(0, 30)}....</p>
-              <div className="card-actions justify-end">
+              <div className="card-actions items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <FacebookShareButton
+                    title={i.title}
+                    url={`${import.meta.VITE_SOCIAL_SHARE_BASE_URL}/${i._id}`}
+                    // qoute={"Share this blog wtih facebook"}
+                    hashtag="#Blood Donation"
+                  >
+                    <FacebookIcon size="28px" round={true} />
+                  </FacebookShareButton>
+
+                  <WhatsappShareButton
+                    title={i.title}
+                    url={`${import.meta.VITE_SOCIAL_SHARE_BASE_URL}/${i._id}`}
+                    // qoute={"Share this blog wtih facebook"}
+                    hashtag="#Blood Donation"
+                  >
+                    <WhatsappIcon size="28px" round={true} />
+                  </WhatsappShareButton>
+
+                  <TwitterShareButton
+                    title={i.title}
+                    url={`${import.meta.VITE_SOCIAL_SHARE_BASE_URL}/${i._id}`}
+                    // qoute={"Share this blog wtih facebook"}
+                    hashtag="#Blood Donation"
+                  >
+                    <TwitterIcon size="28px" round={true} />
+                  </TwitterShareButton>
+                </div>
                 <Link to={`/blogs/${i._id}`}>
                   <button className="px-4 py-2 bg-red-500 text-white font-semibold rounded-full transition-colors duration-700 hover:bg-green-500">
                     View Details

@@ -7,7 +7,7 @@ import useAxiosSecure from "../../../API/useAxiosSecure";
 import { SecurityContext } from "../../../Provider/SecurityProvider";
 
 const DonorCreateDonation = () => {
-  const {user} = useContext(SecurityContext);
+  const { user } = useContext(SecurityContext);
   const { handleSuccessToast, handleErrorToast } =
     useContext(NotificationContext);
   const axiosPublic = useAxiosPublic();
@@ -70,8 +70,8 @@ const DonorCreateDonation = () => {
           donationdate: currentdonationdate,
           donationtime: formatedTime,
           requestmessage: currentrequestmessage,
-          donorname:"null",
-          donoremail:"null",
+          donorname: "null",
+          donoremail: "null",
           status,
         };
         axiosSecure
@@ -87,6 +87,8 @@ const DonorCreateDonation = () => {
             }
           });
       }
+    } else {
+      handleErrorToast("Your account is blocked. Can't create donate request!");
     }
   };
 
@@ -108,7 +110,7 @@ const DonorCreateDonation = () => {
                     Requester Name
                   </label>
                   <input
-                    className="font-semibold col-span-2 md:col-span-3 lg:col-span-5 px-2 py-2 bg-red-50 outline-none"
+                    className="font-semibold col-span-2 md:col-span-3 lg:col-span-5 px-2 py-2 bg-red-50 outline-none disabled:cursor-not-allowed"
                     disabled
                     defaultValue={userData.name}
                     type="text"
@@ -126,7 +128,7 @@ const DonorCreateDonation = () => {
                     Requester Email
                   </label>
                   <input
-                    className="font-semibold col-span-2 md:col-span-3 lg:col-span-5 px-2 py-2 bg-red-50 outline-none"
+                    className="font-semibold col-span-2 md:col-span-3 lg:col-span-5 px-2 py-2 bg-red-50 outline-none disabled:cursor-not-allowed"
                     disabled
                     defaultValue={userData.email}
                     type="email"
@@ -302,7 +304,7 @@ const DonorCreateDonation = () => {
               </div>
             </div>
             <input
-              className="ml-[38%] md:ml-[42%] lg:ml-[6%] px-4 text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-red-500"
+              className="ml-[38%] md:ml-[42%] lg:ml-[6%] px-4 text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-red-500 transition-colors duration-700 hover:bg-green-500"
               type="submit"
               value="Request"
             />

@@ -75,12 +75,12 @@ const Banner = () => {
 
           <div className="flex justify-center gap-2 lg:gap-10 z-10">
             <Link to="/register">
-              <button className="md:px-2 md:py-1 lg:px-6 lg:py-2 bg-red-500 text-white rounded-full lg:text-[18px]">
+              <button className="md:px-2 md:py-1 lg:px-6 lg:py-2 bg-red-500 text-white rounded-full lg:text-[18px] transition-colors duration-700 hover:bg-green-500">
                 Join as donor
               </button>
             </Link>
             <Link to="/search-donors">
-              <button className="md:px-2 md:py-1 lg:px-6 lg:py-2 bg-black text-white rounded-full lg:text-[18px]">
+              <button className="md:px-2 md:py-1 lg:px-6 lg:py-2 bg-black text-white rounded-full lg:text-[18px] transition-colors duration-700 hover:bg-green-500">
                 Search Donors
               </button>
             </Link>
@@ -112,12 +112,12 @@ const Banner = () => {
           <img src={banner} className="w-1/2" />
         </div>
         <div className="absolute -bottom-4 left-[20%] flex justify-center gap-2 lg:gap-10">
-          <Link>
+          <Link to="/register">
             <button className="p-1 rounded-sm bg-red-500 text-white">
               Join as donor
             </button>
           </Link>
-          <Link>
+          <Link to="/search-donors">
             <button className="p-1 rounded-sm bg-black text-white ">
               Search Donors
             </button>

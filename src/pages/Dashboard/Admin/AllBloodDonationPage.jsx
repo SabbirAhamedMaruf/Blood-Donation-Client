@@ -81,13 +81,13 @@ const AllBloodDonationPage = () => {
   return (
     <div className="w-[90%] h-[100vh] lg:h-[80vh] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">
       <h1 className="text-center text-xl md:text-2xl lg:text-4xl font-semibold ">
-        All donation list
+        All blood donation list
       </h1>
       <div className="flex flex-col">
         <div className="h-[500px]">
           {adminDonationData.length === 0 ? (
             <h1 className="text-xl md:text-2xl lg:text-3xl text-red-500 font-semibold text-center mt-60">
-              Not donation request found
+              No donation requests found
             </h1>
           ) : (
             <div className="h-3/4 w-full py-5">

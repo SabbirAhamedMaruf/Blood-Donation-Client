@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useUserData from "../../../API/useUserData";
 import { NotificationContext } from "../../../hooks/Notification";
 import useAxiosSecure from "../../../API/useAxiosSecure";
 import { SecurityContext } from "../../../Provider/SecurityProvider";
 
 const ViewDonationDetails = () => {
-  const {user}=useContext(SecurityContext);
+  const { user } = useContext(SecurityContext);
+  const navigate = useNavigate();
   const { handleSuccessToast, handleErrorToast } =
     useContext(NotificationContext);
   const [, userData] = useUserData();
@@ -30,9 +31,11 @@ const ViewDonationDetails = () => {
   // getting donation data
   useEffect(() => {
     axiosSecure
-      .get(`/getsingledonationdata?donationDataId=${params.id}&email=${user.email}`)
+      .get(
+        `/getsingledonationdata?donationDataId=${params.id}&email=${user.email}`
+      )
       .then((res) => setCurrentDonationData(res.data.data));
-  }, [axiosSecure, params.id, setCurrentDonationData,user.email]);
+  }, [axiosSecure, params.id, setCurrentDonationData, user.email]);
 
   //   Donating blood accpetance api
   const handleDonate = (donationId) => {
@@ -48,6 +51,8 @@ const ViewDonationDetails = () => {
           handleSuccessToast(
             "Thanks for your kindness. Please visit recipient!"
           );
+          setShowDonateModal(false);
+          navigate("/dashboard/donorhome");
         } else {
           handleErrorToast("An error occured during confirmation!");
         }
@@ -272,7 +277,7 @@ const ViewDonationDetails = () => {
             {/* My Custom Modal */}
             <button
               onClick={() => setShowDonateModal(true)}
-              className="ml-[38%] md:ml-[42%] lg:ml-[6%] px-4 text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-red-500"
+              className="ml-[38%] md:ml-[42%] lg:ml-[6%] px-4 text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-red-500 transition-colors duration-700 hover:bg-green-500"
             >
               Donate
             </button>

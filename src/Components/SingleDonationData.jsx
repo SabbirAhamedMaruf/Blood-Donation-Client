@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import useUserType from "../API/useUserType";
+// import { useContext } from "react";
+// import { SecurityContext } from "../Provider/SecurityProvider";
 const SingleDonationData = ({
   showDeleteModal,
   setShowDeleteModal,
@@ -11,6 +13,8 @@ const SingleDonationData = ({
   number,
   data,
 }) => {
+  // const {user}= useContext(SecurityContext);
+  console.log(data)
   const [userType] = useUserType();
   return (
     <tr>
@@ -66,16 +70,16 @@ const SingleDonationData = ({
         )}
       </td>
       <td>
-        {userType === "admin" && (
+        {userType !== "volunteer"  && (
           <Link to={`/dashboard/update-donation-request/${data._id}`}>
             <button className="px-2 py-1 bg-yellow-500 text-white rounded-md">
               Edit
             </button>
           </Link>
-        )}
+         )} 
       </td>
       <td>
-        {userType === "admin" && (
+        {userType !== "volunteer" && (
           <div>
             {/* My Custom Modal */}
             <button
@@ -110,10 +114,16 @@ const SingleDonationData = ({
               </div>
             )}
           </div>
-        )}
+        )} 
       </td>
       <td>
-        {data.status === "inprogress" ? (
+        {data.status === "pending" ?(
+          <Link to={`/dashboard/view-donation-details/${data._id}`}>
+            <button className="px-2 p-1 bg-green-500 text-white rounded-md">
+              Details
+            </button>
+          </Link>
+        ) : data.status==="inprogress"?(
           <div>
             {/* My Custom Modal */}
             <button
@@ -158,13 +168,7 @@ const SingleDonationData = ({
               </div>
             )}
           </div>
-        ) : (
-          <Link to={`/dashboard/view-donation-details/${data._id}`}>
-            <button className="px-2 p-1 bg-green-500 text-white rounded-md">
-              Details
-            </button>
-          </Link>
-        )}
+        ) : ""}
       </td>
     </tr>
   );

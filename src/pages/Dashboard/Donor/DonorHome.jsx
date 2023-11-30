@@ -1,17 +1,17 @@
 import { useContext, useState } from "react";
 import useDonorDonationData from "../../../API/useDonorDonationData";
 import useUserData from "../../../API/useUserData";
-import SingleDonationData from "../../../Components/SingleDonationData"; 
+import SingleDonationData from "../../../Components/SingleDonationData";
 import { NotificationContext } from "../../../hooks/Notification";
 import { Link } from "react-router-dom";
 import { SecurityContext } from "../../../Provider/SecurityProvider";
 import useAxiosSecure from "../../../API/useAxiosSecure";
 const DonorHome = () => {
-  const {user}=useContext(SecurityContext);
+  const { user } = useContext(SecurityContext);
   const { handleSuccessToast, handleErrorToast } =
     useContext(NotificationContext);
   const [, userData] = useUserData();
-  const [handleRefech,setHandleRefetch]=useState(true);
+  const [handleRefech, setHandleRefetch] = useState(true);
   const [donorDonationData, refetch] = useDonorDonationData();
   const axiosSecure = useAxiosSecure();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -20,7 +20,9 @@ const DonorHome = () => {
   // deleteing donation request
   const handleDeleteDonationData = (donationId) => {
     axiosSecure
-      .delete(`/deletedonationrequestsdata?donationId=${donationId}&email=${user.email}`)
+      .delete(
+        `/deletedonationrequestsdata?donationId=${donationId}&email=${user.email}`
+      )
       .then((res) => {
         if (res.data.data.acknowledged) {
           handleSuccessToast("Donation request deleted successfully!");
@@ -38,7 +40,9 @@ const DonorHome = () => {
   // update donation status
   const handleUpdateDonationStatus = (donationId, status) => {
     axiosSecure
-      .patch(`/confrimdonation?donationId=${donationId}&status=${status}&email=${user.email}`)
+      .patch(
+        `/confrimdonation?donationId=${donationId}&status=${status}&email=${user.email}`
+      )
       .then((res) => {
         if (res.data.data.acknowledged) {
           handleSuccessToast("Donation request updated successfully!");
@@ -116,19 +120,12 @@ const DonorHome = () => {
               </div>
             </div>
           )}
-          {donorDonationData.length === 0 ? (
-            <Link to="/dashboard/my-donation-requests">
-              <button className="ml-[38%] md:ml-[42%] lg:ml-[1%] mt-[15%] px-4 text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-blue-500">
-                View my request
-              </button>
-            </Link>
-          ) : (
-            <Link to="/dashboard/my-donation-requests">
-              <button className="ml-[38%] md:ml-[42%] lg:ml-[1%] mt-[2%] px-4 text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-blue-500">
-                View my request
-              </button>
-            </Link>
-          )}
+
+          <Link to="/dashboard/my-donation-requests">
+            <button className="ml-[38%] md:ml-[42%] lg:ml-[1%] mt-[15%] px-4 text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-blue-500 transition-colors duration-700 hover:bg-green-500">
+              View my request
+            </button>
+          </Link>
         </div>
       </div>
     </div>

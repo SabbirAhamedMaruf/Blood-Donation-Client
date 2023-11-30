@@ -21,7 +21,7 @@ const DonationRequest = () => {
           </h1>
           {pendingDonationRequest.length === 0 ? (
             <h1 className="text-xl md:text-2xl lg:text-3xl text-red-500 font-semibold text-center mt-60">
-              Not donation request found
+              No donation requests found
             </h1>
           ) : (
             <div className="h-3/4 w-full py-5">

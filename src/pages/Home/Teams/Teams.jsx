@@ -6,7 +6,7 @@ import { FaFacebookF } from "react-icons/fa6";
 import { FaInstagramSquare, FaTwitter } from "react-icons/fa";
 const Teams = () => {
   return (
-    <div className="w-[70vw] m-auto py-10 flex gap-5">
+    <div className="md:mr-14 lg:mr-[14%]  w-[70vw] md:w-[80vw] lg:w-[70vw] m-auto py-10 grid grid-cols-1 md:grid-cols-2 lg:flex flex-row gap-y-10 lg:gap-5">
       <div className="card card-compact md:w-72 lg:w-96 bg-base-100 shadow-xl space-y-5">
         <figure className="relative">
           <img src={doc1} alt="Shoes" />
@@ -14,7 +14,7 @@ const Teams = () => {
             Hi
           </div>
         </figure>
-        <div className="relative text-center font-bold pb-8">
+        <div className="relative text-center font-semibold pb-8">
           <h2 className="text-2xl ">Dr. Benjamin Mitchell</h2>
           <p className="text-xl">Co-Founder</p>
           <div className="absolute -bottom-3 left-[30%] flex justify-center gap-5 text-xl ">
@@ -31,7 +31,7 @@ const Teams = () => {
             Hi
           </div>
         </figure>
-        <div className="relative text-center font-bold pb-8">
+        <div className="relative text-center font-semibold pb-8">
           <h2 className="text-2xl ">Dr. Benjamin Mitchell</h2>
           <p className="text-xl">Co-Founder</p>
           <div className="absolute -bottom-3 left-[30%] flex justify-center gap-5 text-xl ">
@@ -48,7 +48,7 @@ const Teams = () => {
             Hi
           </div>
         </figure>
-        <div className="relative text-center font-bold pb-8">
+        <div className="relative text-center font-semibold pb-8">
           <h2 className="text-2xl ">Dr. Benjamin Mitchell</h2>
           <p className="text-xl">Co-Founder</p>
           <div className="absolute -bottom-3 left-[30%] flex justify-center gap-5 text-xl ">
@@ -65,7 +65,7 @@ const Teams = () => {
             Hi
           </div>
         </figure>
-        <div className="relative text-center font-bold pb-8">
+        <div className="relative text-center font-semibold pb-8">
           <h2 className="text-2xl ">Dr. Benjamin Mitchell</h2>
           <p className="text-xl">Co-Founder</p>
           <div className="absolute -bottom-3 left-[30%] flex justify-center gap-5 text-xl ">
@@ -80,5 +80,3 @@ const Teams = () => {
 };
 
 export default Teams;
-
-

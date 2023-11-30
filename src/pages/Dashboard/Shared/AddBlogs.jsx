@@ -17,7 +17,7 @@ const AddBlogs = () => {
   const axiosSecure = useAxiosSecure();
   const editor = useRef(null);
   const [content, setContent] = useState("");
-  const [,userData]=useUserData();
+  const [, userData] = useUserData();
 
   const handleAddBlogPost = async (e) => {
     e.preventDefault();
@@ -40,6 +40,7 @@ const AddBlogs = () => {
       avatar: userData.photo,
       content: currentContent,
       status: "draft",
+      featured: "Not featured",
     };
 
     await axiosSecure
@@ -110,4 +111,3 @@ const AddBlogs = () => {
 };
 
 export default AddBlogs;
-

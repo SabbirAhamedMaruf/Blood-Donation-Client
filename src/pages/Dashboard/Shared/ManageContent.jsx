@@ -26,6 +26,14 @@ const ManageContent = () => {
     setRefetch(!refetch);
   };
 
+  // changing blog status
+  const handleChangeFeaturedStatus = async (blogId, status) => {
+    await axiosSecure.patch(
+      `/make-blog-featured?email=${user.email}&blogId=${blogId}&status=${status}`
+    );
+    setRefetch(!refetch);
+  };
+
   // delete blog
   const handleDeleteBlog = async (blogId) => {
     await axiosSecure.delete(
@@ -39,8 +47,6 @@ const ManageContent = () => {
       .get(`/get-blog-data?blogType=${blogType}`)
       .then((res) => setAllBlogs(res.data.data));
   }, [axiosPublic, blogType, refetch]);
-
-
 
   return (
     <div className="w-[90%] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">
@@ -64,7 +70,7 @@ const ManageContent = () => {
           </Link>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 my-10">
+      <div className="ml-8 md:ml-0 lg:ml-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-y-16 my-10">
         {allBlogs.map((i) => (
           <div
             key={i._id}
@@ -76,20 +82,20 @@ const ManageContent = () => {
             <div className="card-body">
               <h2 className="card-title">{i.title}</h2>
               <p>{i.content.replace(/<[^>]*>/g, "").slice(0, 30)}....</p>
-              <div className="card-actions justify-end">
+              <div className="card-actions justify-center">
                 {userType === "admin" && (
                   <>
                     {i.status === "draft" ? (
                       <button
                         onClick={() => handleChangeBlogStatus(i._id, "publish")}
-                        className="px-4 py-1 bg-green-400 font-semibold text-white rounded-full"
+                        className="px-2 py-1 bg-green-400 font-semibold text-white rounded-full"
                       >
                         Publish
                       </button>
                     ) : (
                       <button
                         onClick={() => handleChangeBlogStatus(i._id, "draft")}
-                        className="px-4 py-1 bg-green-400 font-semibold text-white rounded-full"
+                        className="px-2 py-1 bg-green-400 font-semibold text-white rounded-full"
                       >
                         Unpublish
                       </button>
@@ -98,12 +104,35 @@ const ManageContent = () => {
                 )}
 
                 {userType === "admin" && (
-                  <button
-                    onClick={() => handleDeleteBlog(i._id)}
-                    className="px-4 py-1 bg-red-400 font-semibold text-white rounded-full"
-                  >
-                    Delete
-                  </button>
+                  <div>
+                    <button
+                      onClick={() => handleDeleteBlog(i._id)}
+                      className="mr-1 px-2 py-1 bg-red-400 font-semibold text-white rounded-full"
+                    >
+                      Delete
+                    </button>
+                    <>
+                      {i.featured === "Not featured" ? (
+                        <button
+                          onClick={() =>
+                            handleChangeFeaturedStatus(i._id, "featured")
+                          }
+                          className="px-2 py-1 bg-blue-400 font-semibold text-white rounded-full"
+                        >
+                          Featured
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() =>
+                            handleChangeFeaturedStatus(i._id, "Not featured")
+                          }
+                          className="px-2 py-1 bg-red-400 font-semibold text-white rounded-full"
+                        >
+                          Not Featured
+                        </button>
+                      )}
+                    </>
+                  </div>
                 )}
               </div>
             </div>

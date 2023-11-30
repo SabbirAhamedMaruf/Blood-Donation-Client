@@ -47,7 +47,7 @@ const ContactUs = () => {
             rows="5"
             placeholder="Your message"
           ></textarea>
-          <input className="text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-black" type="submit" value="Submit" />
+          <input className="text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-black transition-colors duration-700 hover:bg-green-500" type="submit" value="Submit" />
         </form>
       </div>
       <div className="pt-5 md:pt-0 text-center md:text-left text-white space-y-3 lg:space-y-10">

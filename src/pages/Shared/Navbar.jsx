@@ -98,12 +98,6 @@ const Navbar = () => {
             ) : (
               <></>
             )}
-            {/* 
-            {user && (
-              <>
-                <NavLink to="/contact">Fundings</NavLink>
-              </>
-            )} */}
           </ul>
         </div>
 
@@ -133,8 +127,20 @@ const Navbar = () => {
                     <h1>{userData.name}</h1>
                   </div>
                   <ul className="flex flex-col">
-                    <NavLink to="/contact">Dashboard</NavLink>
-                    <NavLink to="/contact">Fundings</NavLink>
+                    {userType === "admin" ? (
+                      <>
+                        <NavLink to="/dashboard/adminhome">Dashboard</NavLink>
+                      </>
+                    ) : userType === "donor" ? (
+                      <>
+                        <NavLink to="/dashboard/donorhome">Dashboard</NavLink>{" "}
+                        <NavLink to="/dashboard/donorfundfororganization">Fundings</NavLink>
+                      </>
+                    ) : userType === "volunteer" ? (
+                      <NavLink to="/dashboard/volunteerhome">Dashboard</NavLink>
+                    ) : (
+                      <></>
+                    )}
                   </ul>
                   <button
                     className="px-3 py-2 bg-red-500 text-white rounded-full"
@@ -146,7 +152,7 @@ const Navbar = () => {
               </div>
             ) : (
               <Link to="/login">
-                <button className="hidden md:block md:px-2 md:py-1 lg:px-6 lg:py-2 bg-red-500 text-white rounded-full text-[18px]">
+                <button className="hidden md:block md:px-2 md:py-1 lg:px-6 lg:py-2 bg-red-500 text-white rounded-full text-[18px] transition-colors duration-700 hover:bg-green-500">
                   Login
                 </button>
               </Link>
@@ -159,5 +165,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-// TODO : will have logo, donation requests, blog, login, registration link before logged in. and will have dashboard, and fundings links addition to those links.

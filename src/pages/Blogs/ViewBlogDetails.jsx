@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAxiosPublic from "../../API/useAxiosPublic";
 import { useParams } from "react-router-dom";
 import { Markup } from "interweave";
+
 const ViewBlogDetails = () => {
   const params = useParams();
   const [currentBlogData, setCurrentBlogData] = useState([]);

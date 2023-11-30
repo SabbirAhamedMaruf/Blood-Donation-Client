@@ -11,16 +11,15 @@ const AdminHome = () => {
   const [, userData] = useUserData();
   const axiosSecure = useAxiosSecure();
 
-  const [statistics,setStatistics]=useState([]);
-
+  const [statistics, setStatistics] = useState([]);
 
   useEffect(() => {
-    axiosSecure.get(`/adminstatistics?email=${user.email}`)
-    .then(res => setStatistics(res.data.data))
+    axiosSecure
+      .get(`/adminstatistics?email=${user.email}`)
+      .then((res) => setStatistics(res.data.data));
   }, [axiosSecure, user.email]);
 
-
-  console.log(statistics)
+  console.log(statistics);
 
   return (
     <div>
@@ -45,7 +44,7 @@ const AdminHome = () => {
             <div className="md:w-full flex items-center shadow-2xl p-5 lg:p-10 rounded-xl bg-gray-50">
               <RiMoneyDollarCircleFill className="text-[100px] text-white bg-blue-500 p-5 rounded-xl" />
               <div className="card-body">
-                <h2 className="text-4xl">{statistics.totalDonation}</h2>
+                <h2 className="text-4xl">{statistics.sum}$</h2>
                 <h2 className="card-title">Total Funds</h2>
               </div>
             </div>
@@ -53,7 +52,7 @@ const AdminHome = () => {
             <div className="w-[72vw] md:w-full flex items-center shadow-2xl p-5 lg:p-10 rounded-xl bg-gray-50">
               <BiSolidDonateBlood className="text-[100px] text-white bg-green-500 p-5 rounded-xl" />
               <div className="card-body">
-                <h2 className="text-4xl">{statistics.sum}</h2>
+                <h2 className="text-4xl">{statistics.totalDonation}</h2>
                 <h2 className="card-title">Total Blood Donation</h2>
               </div>
             </div>

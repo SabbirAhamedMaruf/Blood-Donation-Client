@@ -69,7 +69,7 @@ const Login = () => {
             </div>
 
             <input
-              className="text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-red-500"
+              className="text-center text-xl text-white font-bold rounded-full  py-1 lg:py-2 bg-red-500 transition-colors duration-700 hover:bg-green-500"
               type="submit"
               value="Submit"
             />

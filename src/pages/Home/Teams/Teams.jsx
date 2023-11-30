@@ -4,9 +4,17 @@ import doc3 from "../../../assets/doc3.jpg";
 import doc4 from "../../../assets/doc4.jpg";
 import { FaFacebookF } from "react-icons/fa6";
 import { FaInstagramSquare, FaTwitter } from "react-icons/fa";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
 const Teams = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      AOS.init({ once: true });
+    }, 1000);
+  }, []);
   return (
-    <div className="md:mr-14 lg:mr-[14%]  w-[70vw] md:w-[80vw] lg:w-[70vw] m-auto py-10 grid grid-cols-1 md:grid-cols-2 lg:flex flex-row gap-y-10 lg:gap-5">
+    <div data-aos="fade-up" className="md:mr-14 lg:mr-[14%]  w-[70vw] md:w-[80vw] lg:w-[70vw] m-auto py-10 grid grid-cols-1 md:grid-cols-2 lg:flex flex-row gap-y-10 lg:gap-5">
       <div className="card card-compact md:w-72 lg:w-96 bg-base-100 shadow-xl space-y-5">
         <figure className="relative">
           <img src={doc1} alt="Shoes" />
@@ -24,7 +32,7 @@ const Teams = () => {
           </div>
         </div>
       </div>
-      <div className="card card-compact md:w-72 lg:w-96 bg-base-100 shadow-xl space-y-5">
+      <div  className="card card-compact md:w-72 lg:w-96 bg-base-100 shadow-xl space-y-5">
         <figure className="relative">
           <img src={doc2} alt="Shoes" />
           <div className="absolute bg-black w-full h-full opacity-0 transition-all duration-700 hover:opacity-20">
@@ -41,7 +49,7 @@ const Teams = () => {
           </div>
         </div>
       </div>
-      <div className="card card-compact md:w-72 lg:w-96 bg-base-100 shadow-xl space-y-5">
+      <div  className="card card-compact md:w-72 lg:w-96 bg-base-100 shadow-xl space-y-5">
         <figure className="relative">
           <img src={doc3} alt="Shoes" />
           <div className="absolute bg-black w-full h-full opacity-0 transition-all duration-700 hover:opacity-20">
@@ -58,7 +66,7 @@ const Teams = () => {
           </div>
         </div>
       </div>
-      <div className="card card-compact md:w-72 lg:w-96 bg-base-100 shadow-xl space-y-5">
+      <div  className="card card-compact md:w-72 lg:w-96 bg-base-100 shadow-xl space-y-5">
         <figure className="relative">
           <img src={doc4} alt="Shoes" />
           <div className="absolute bg-black w-full h-full opacity-0 transition-all duration-700 hover:opacity-20">

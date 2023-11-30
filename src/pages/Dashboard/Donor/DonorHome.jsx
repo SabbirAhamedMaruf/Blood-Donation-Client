@@ -6,6 +6,8 @@ import { NotificationContext } from "../../../hooks/Notification";
 import { Link } from "react-router-dom";
 import { SecurityContext } from "../../../Provider/SecurityProvider";
 import useAxiosSecure from "../../../API/useAxiosSecure";
+import { Helmet } from "react-helmet";
+
 const DonorHome = () => {
   const { user } = useContext(SecurityContext);
   const { handleSuccessToast, handleErrorToast } =
@@ -59,9 +61,12 @@ const DonorHome = () => {
 
   return (
     <div>
+          <Helmet>
+        <title>Life Flow : Dashboard</title>
+      </Helmet>
       <div className="w-[90%] h-[100vh] lg:h-[80vh] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">
         <div>
-          <h1 className="h-1/4 text-center text-xl md:text-2xl lg:text-4xl font-semibold my-10">
+          <h1 className="h-1/4 text-center text-xl md:text-2xl lg:text-4xl font-semibold ">
             Welcome {userData.name}
           </h1>
           {donorDonationData.length === 0 ? (

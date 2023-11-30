@@ -4,6 +4,7 @@ import { NotificationContext } from "../../../hooks/Notification";
 import useAxiosSecure from "../../../API/useAxiosSecure";
 import SingleUserData from "../../../Components/SingleUserData";
 import useManageAllUsers from "../../../API/useManageAllUsers";
+import { Helmet } from "react-helmet";
 
 const ManageAllUsers = () => {
   const { user } = useContext(SecurityContext);
@@ -73,6 +74,9 @@ const ManageAllUsers = () => {
 
   return (
     <div className="w-[90%] h-[100vh] lg:h-[80vh] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">
+      <Helmet>
+        <title>Life Flow : Manage All Users</title>
+      </Helmet>
       <h1 className="text-center text-xl md:text-2xl lg:text-4xl font-semibold ">
         Manage Users
       </h1>
@@ -170,5 +174,3 @@ const ManageAllUsers = () => {
 };
 
 export default ManageAllUsers;
-
-// TODO : Work on state for modal

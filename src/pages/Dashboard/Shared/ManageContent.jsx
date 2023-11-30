@@ -4,6 +4,9 @@ import useAxiosPublic from "../../../API/useAxiosPublic";
 import useAxiosSecure from "../../../API/useAxiosSecure";
 import { SecurityContext } from "../../../Provider/SecurityProvider";
 import useUserType from "../../../API/useUserType";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Helmet } from "react-helmet";
 
 const ManageContent = () => {
   const [userType] = useUserType();
@@ -17,6 +20,12 @@ const ManageContent = () => {
   const handleChangeBlogType = (e) => {
     setBlogType(e.target.value);
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      AOS.init({ once: true });
+    }, 1000);
+  }, []);
 
   // changing blog status
   const handleChangeBlogStatus = async (blogId, status) => {
@@ -50,6 +59,9 @@ const ManageContent = () => {
 
   return (
     <div className="w-[90%] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">
+            <Helmet>
+        <title>Life Flow : Content Management</title>
+      </Helmet>
       <div className="h-[5vh] flex justify-between items-center">
         <div>
           <label htmlFor="sortblog">Sort By</label>
@@ -70,7 +82,11 @@ const ManageContent = () => {
           </Link>
         </div>
       </div>
-      <div className="ml-8 md:ml-0 lg:ml-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-y-16 my-10">
+      <div
+        data-aos="fade-up"
+        data-aos-duration="1500"
+        className="ml-8 md:ml-0 lg:ml-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-y-16 my-10"
+      >
         {allBlogs.map((i) => (
           <div
             key={i._id}

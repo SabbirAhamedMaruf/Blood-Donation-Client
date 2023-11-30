@@ -7,6 +7,9 @@ import axios from "axios";
 import useAxiosPublic from "../../API/useAxiosPublic";
 import { updateProfile } from "firebase/auth";
 import useDistrictsData from "../../API/useDistrictsData";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Helmet } from "react-helmet";
 
 const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${
   import.meta.env.VITE_IMAGEBB_API
@@ -33,6 +36,12 @@ const Register = () => {
   const { handleSuccessToast } = useContext(NotificationContext);
   const { registerWithEmailAndPassword, handleSignOut } =
     useContext(SecurityContext);
+
+  useEffect(() => {
+    setTimeout(() => {
+      AOS.init({ once: true });
+    }, 1000);
+  }, []);
 
   // getting password value
   const handleSetPassword = (e) => {
@@ -138,6 +147,9 @@ const Register = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Life Flow : Register</title>
+      </Helmet>
       <div className="w-[90%] lg:w-[80vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5 flex flex-col lg:flex-row gap-10 md:gap-5 lg:gap-20">
         <div className="lg:w-1/2">
           <img
@@ -145,7 +157,7 @@ const Register = () => {
             className="shadow-lg lg:shadow-xl rounded-lg"
           />
         </div>
-        <div className="lg:w-1/2">
+        <div data-aos="fade-left" data-aos-duration="1500" className="lg:w-1/2">
           <h1 className="text-center font-bold text-xl lg:text-4xl my-10">
             Register
           </h1>
@@ -325,5 +337,3 @@ const Register = () => {
 };
 
 export default Register;
-
-

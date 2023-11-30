@@ -5,6 +5,8 @@ import {  useParams } from "react-router-dom";
 import { NotificationContext } from "../../../hooks/Notification";
 import { SecurityContext } from "../../../Provider/SecurityProvider";
 import useAxiosSecure from "../../../API/useAxiosSecure";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const UpdateDonationData = () => {
   const {user}=useContext(SecurityContext);
@@ -27,7 +29,11 @@ const UpdateDonationData = () => {
     requestmessage,
   } = currentDonationData;
 
-
+  useEffect(() => {
+    setTimeout(() => {
+      AOS.init({ once: true });
+    }, 1000);
+  }, []);
   // getting donation data
   useEffect(() => {
     axiosSecure
@@ -108,10 +114,10 @@ const UpdateDonationData = () => {
     <div>
       <div className="w-[90%] lg:w-[80vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">
         <div>
-          <h1 className="text-center font-bold text-xl lg:text-4xl my-10">
+          <h1 className="text-center font-bold text-xl lg:text-4xl ">
             Update Donation Reaquest
           </h1>
-          <form onSubmit={handleDonationDataUpdate} className="py-10">
+          <form data-aos="fade-up" data-aos-duration="1500" onSubmit={handleDonationDataUpdate} className="py-10">
             <div className="flex flex-col lg:flex-row justify-around p-3 text-[12px] md:text-[15px]">
               <div className="space-y-2 md:space-y-3 lg:space-y-10">
                 <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7">

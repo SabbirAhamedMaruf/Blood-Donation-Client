@@ -7,6 +7,12 @@ import { MdExitToApp } from "react-icons/md";
 import { NotificationContext } from "../../../hooks/Notification";
 import useAxiosSecure from "../../../API/useAxiosSecure";
 import useAxiosPublic from "../../../API/useAxiosPublic";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+import { Helmet } from "react-helmet";
+
+
 const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${
   import.meta.env.VITE_IMAGEBB_API
 }`;
@@ -19,6 +25,12 @@ const Profile = () => {
   const [open, setOpen] = useState(false);
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
+
+  useEffect(() => {
+    setTimeout(() => {
+      AOS.init({ once: true });
+    }, 1000);
+  }, []);
 
   // getting upazila data based on districts
   const handleGetUpazilas = (e) => {
@@ -66,6 +78,9 @@ const Profile = () => {
 
   return (
     <div>
+            <Helmet>
+        <title>Life Flow : Profile</title>
+      </Helmet>
       <div className="w-[90%] lg:h-[80vh] lg:w-[80vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5  flex flex-col lg:flex-row gap-10 md:gap-5 lg:gap-20">
         <div className="p-5 lg:w-1/2 shadow-2xl h-full flex flex-col justify-center items-center gap-10 rounded-xl">
           <img src={profileUpdatebanner} className="" />
@@ -209,7 +224,7 @@ const Profile = () => {
             )}
           </div>
         </div>
-        <div className="p-5 md:p-0 lg:w-1/2 flex flex-col justify-center items-center lg:items-left lg:text-2xl gap-5 lg:gap-10">
+        <div data-aos="fade-left" data-aos-duration="1500" className="p-5 md:p-0 lg:w-1/2 flex flex-col justify-center items-center lg:items-left lg:text-2xl gap-5 lg:gap-10">
           <img src={userData.photo} className="w-20" />
           <h1>
             <span className="font-bold">Name :</span> {userData.name}

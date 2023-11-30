@@ -63,7 +63,7 @@ const ViewDonationDetails = () => {
     <div>
       <div className="w-[90%] lg:w-[80vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">
         <div>
-          <h1 className="text-center font-bold text-xl lg:text-4xl my-10">
+          <h1 className="text-center font-semibold text-xl lg:text-4xl ">
             Donation Reaquest Details
           </h1>
           <section className="py-10">

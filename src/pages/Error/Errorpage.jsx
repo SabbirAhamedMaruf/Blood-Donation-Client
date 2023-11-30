@@ -1,12 +1,16 @@
 import errorLogo from "../../assets/errorlogo.jpg";
 import { Link, useRouteError } from "react-router-dom";
 import Navbar from "../Shared/Navbar";
+import { Helmet } from "react-helmet";
 
 const Errorpage = () => {
   const error = useRouteError();
   console.log(error);
   return (
     <div className="font-josefin-sans h-[100vh] bg-white ">
+      <Helmet>
+        <title>Life Flow : Error</title>
+      </Helmet>
       <div>
         <Navbar />
         <div className="grid justify-center items-center">

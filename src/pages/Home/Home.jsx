@@ -4,9 +4,14 @@ import Footer from "../Shared/Footer";
 import OurBestServices from "./OurBestServices/OurBestServices";
 import UpcomingFeaturedCampaign from "./UpcomingCampaign/UpcomingFeaturedCampaign";
 import Teams from "./Teams/Teams";
+import { Helmet } from "react-helmet";
+
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>Life Flow</title>
+      </Helmet>
       <Banner />
       <OurBestServices />
       <ContactUs />

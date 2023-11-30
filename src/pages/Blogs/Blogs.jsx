@@ -7,8 +7,16 @@ import {
   TwitterShareButton,
 } from "react-share";
 import { FacebookIcon, WhatsappIcon, TwitterIcon } from "react-share";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Helmet } from "react-helmet";
 
 const Blogs = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      AOS.init({ once: true });
+    }, 1000);
+  }, []);
   const [allBlogs, setAllBlogs] = useState([]);
   const axiosPublic = useAxiosPublic();
   useEffect(() => {
@@ -18,12 +26,19 @@ const Blogs = () => {
   }, [axiosPublic]);
   return (
     <div className="w-[90%] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl ">
+      <Helmet>
+        <title>Life Flow : Blogs</title>
+      </Helmet>
       <div className="h-1/4 text-center text-xl md:text-2xl lg:text-2xl font-semibold mb-10">
         <h1 className="text-center font-semibold text-xl md:text-2xl lg:text-4xl ">
           Blogs
         </h1>
       </div>
-      <div className="ml-9 md:ml-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 my-10">
+      <div
+        data-aos="fade-up"
+        data-aos-duration="1500"
+        className="ml-9 md:ml-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 my-10"
+      >
         {allBlogs.map((i) => (
           <div
             key={i._id}

@@ -4,16 +4,16 @@ import { NotificationContext } from "../../../hooks/Notification";
 import useAxiosSecure from "../../../API/useAxiosSecure";
 import SingleDonationData from "../../../Components/SingleDonationData";
 import useAdminDonationData from "../../../API/useAdminDonationData";
-
+import { Helmet } from "react-helmet";
 
 const AllBloodDonationPage = () => {
   const { user } = useContext(SecurityContext);
-  const [handleRefech,setHandleRefetch]=useState(true);
+  const [handleRefech, setHandleRefetch] = useState(true);
   const { handleSuccessToast, handleErrorToast } =
     useContext(NotificationContext);
- 
-    const [adminDonationData,refetch]=useAdminDonationData();
-  const axiosSecure=useAxiosSecure()
+
+  const [adminDonationData, refetch] = useAdminDonationData();
+  const axiosSecure = useAxiosSecure();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [showChangeStatusModal, setShowChangeStatusModal] = useState(false);
 
@@ -30,12 +30,14 @@ const AllBloodDonationPage = () => {
     setCatagory(e.target.value);
   };
 
-  console.log(adminDonationData.length)
+  console.log(adminDonationData.length);
 
   // deleteing donation request
   const handleDeleteDonationData = (donationId) => {
     axiosSecure
-      .delete(`/deletedonationrequestsdata?email=${user.email}&donationId=${donationId}`)
+      .delete(
+        `/deletedonationrequestsdata?email=${user.email}&donationId=${donationId}`
+      )
       .then((res) => {
         if (res.data.data.acknowledged) {
           handleSuccessToast("Donation request deleted successfully!");
@@ -53,7 +55,9 @@ const AllBloodDonationPage = () => {
   // update donation status
   const handleUpdateDonationStatus = (donationId, status) => {
     axiosSecure
-      .patch(`/confrimdonation?donationId=${donationId}&status=${status}&email=${user.email}`)
+      .patch(
+        `/confrimdonation?donationId=${donationId}&status=${status}&email=${user.email}`
+      )
       .then((res) => {
         if (res.data.data.acknowledged) {
           handleSuccessToast("Donation request updated successfully!");
@@ -61,25 +65,25 @@ const AllBloodDonationPage = () => {
           setHandleRefetch(!handleRefech);
           refetch();
         } else {
-          handleErrorToast(
-            "An error occured during updating request!"
-          );
+          handleErrorToast("An error occured during updating request!");
         }
       });
   };
 
-
-    // fetching data using pagination
-    useEffect(() => {
-      axiosSecure
-        .get(
-          `/fetch-all-donation-pagiation?email=${user.email}&currentpage=${currentPage}&catagory=${catagory}`
-        )
-        .then((res) => setPaginationDataHolder(res.data.data));
-    }, [axiosSecure, currentPage, user.email, catagory,handleRefech]);
+  // fetching data using pagination
+  useEffect(() => {
+    axiosSecure
+      .get(
+        `/fetch-all-donation-pagiation?email=${user.email}&currentpage=${currentPage}&catagory=${catagory}`
+      )
+      .then((res) => setPaginationDataHolder(res.data.data));
+  }, [axiosSecure, currentPage, user.email, catagory, handleRefech]);
 
   return (
     <div className="w-[90%] h-[100vh] lg:h-[80vh] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">
+      <Helmet>
+        <title>Life Flow : All Blood Donations</title>
+      </Helmet>
       <h1 className="text-center text-xl md:text-2xl lg:text-4xl font-semibold ">
         All blood donation list
       </h1>
@@ -185,5 +189,3 @@ const AllBloodDonationPage = () => {
 };
 
 export default AllBloodDonationPage;
-
-

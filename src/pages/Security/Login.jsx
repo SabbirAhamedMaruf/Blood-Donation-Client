@@ -3,6 +3,10 @@ import login from "../../assets/login.png";
 import { useContext } from "react";
 import { SecurityContext } from "../../Provider/SecurityProvider";
 import { NotificationContext } from "../../hooks/Notification";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,6 +14,12 @@ const Login = () => {
     useContext(NotificationContext);
   const { loginWithEmailAndPassword } = useContext(SecurityContext);
 
+
+  useEffect(() => {
+    setTimeout(() => {
+      AOS.init({ once: true });
+    }, 1000);
+  }, []);
   // Login with email and password
   const handleLoginWithEmailAndPassword = (e) => {
     e.preventDefault();
@@ -28,11 +38,14 @@ const Login = () => {
 
   return (
     <div>
+         <Helmet>
+        <title>Life Flow : Login</title>
+      </Helmet>
       <div className="w-[90%] lg:w-[80vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5  flex flex-col lg:flex-row gap-10 md:gap-5 lg:gap-20 items-center">
         <div className="lg:w-1/2 p-5 lg:p-0">
           <img src={login} className="shadow-lg lg:shadow-xl rounded-lg" />
         </div>
-        <div className="md:w-1/2 space-y-5">
+        <div data-aos="fade-left" data-aos-duration="1500" className="md:w-1/2 space-y-5">
           <h1 className="text-center font-bold text-xl lg:text-4xl">Login</h1>
           <form
             onSubmit={handleLoginWithEmailAndPassword}

@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import useAxiosPublic from "../../API/useAxiosPublic";
 import useDistrictsData from "../../API/useDistrictsData";
 import SingleDonorData from "../../Components/SingleDonorData";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Helmet } from "react-helmet";
 
 const SearchDonors = () => {
   const axiosPublic = useAxiosPublic();
@@ -35,6 +38,13 @@ const SearchDonors = () => {
       .then((res) => setDonorData(res.data.data));
   };
 
+  
+  useEffect(() => {
+    setTimeout(() => {
+      AOS.init({ once: true });
+    }, 1000);
+  }, []);
+
   // initial data;
 
   useEffect(() => {
@@ -45,11 +55,14 @@ const SearchDonors = () => {
 
   return (
     <div>
+           <Helmet>
+        <title>Life Flow : Search Donors</title>
+      </Helmet>
       <div className="w-[90%] lg:h-[80vh] lg:w-[90vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl  ">
         <h1 className="text-center font-semibold text-xl md:text-2xl lg:text-4xl">
           Search Donors
         </h1>
-        <div className="flex flex-col lg:flex-row gap-5 p-5">
+        <div data-aos="fade-up" data-aos-duration="1500" className="flex flex-col lg:flex-row gap-5 p-5">
           <div className="lg:h-[60vh] p-2 lg:p-4 lg:w-1/4 mt-[67px] bg-red-500 rounded-md">
             <form
               onSubmit={handleSearch}

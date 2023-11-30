@@ -90,7 +90,7 @@ const SingleDonationData = ({
             </button>
             {showDeleteModal && (
               <div>
-                <div className="fixed inset-0 bg-[rgba(22,22,22,0.8)] z-10">
+                <div className="fixed inset-0 bg-[rgba(22,22,22,0.4)] z-10">
                   <div className="fixed top-[35%] left-[40%] p-10 space-y-10 bg-white rounded-xl ">
                     <h3 className="font-bold text-2xl text-left">
                       Delete donation data?

@@ -4,10 +4,20 @@ import { Carousel } from "react-responsive-carousel";
 import { Link } from "react-router-dom";
 import { FaFacebookF, FaTwitter } from "react-icons/fa";
 import { LuInstagram } from "react-icons/lu";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+
+
 
 const Banner = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      AOS.init({ once: true });
+    }, 1000);
+  }, []);
   return (
-    <div className="w-[90vw] m-auto shadow-lg md:p-5 lg:p-10 rounded-lg lg:rounded-2xl mb-10">
+    <div data-aos="fade-up" className="w-[90vw] m-auto shadow-lg md:p-5 lg:p-10 rounded-lg lg:rounded-2xl mb-10">
       <div className="hidden md:flex">
         {/* Slider */}
         <div className="w-1/2 flex flex-col justify-around">

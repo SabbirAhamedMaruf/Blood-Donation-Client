@@ -1,10 +1,13 @@
-import { useContext, useState } from "react";
+import { useContext, useState,useEffect } from "react";
 import useDistrictsData from "../../../API/useDistrictsData";
 import useUserData from "../../../API/useUserData";
 import useAxiosPublic from "../../../API/useAxiosPublic";
 import { NotificationContext } from "../../../hooks/Notification";
 import useAxiosSecure from "../../../API/useAxiosSecure";
 import { SecurityContext } from "../../../Provider/SecurityProvider";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { Helmet } from "react-helmet";
 
 const DonorCreateDonation = () => {
   const { user } = useContext(SecurityContext);
@@ -15,7 +18,11 @@ const DonorCreateDonation = () => {
   const [, userData] = useUserData();
   const [districtData] = useDistrictsData();
   const [upazilaData, setUpazilaData] = useState([]);
-
+  useEffect(() => {
+    setTimeout(() => {
+      AOS.init({ once: true });
+    }, 1000);
+  }, []);
   // getting upazila data based on districts
   const handleGetUpazilas = (e) => {
     e.preventDefault();
@@ -94,12 +101,15 @@ const DonorCreateDonation = () => {
 
   return (
     <div>
+            <Helmet>
+        <title>Life Flow : Create Donation Request</title>
+      </Helmet>
       <div className="w-[90%] lg:w-[80vw] m-auto shadow-lg  md:p-5 lg:p-10 rounded-lg lg:rounded-2xl my-5">
         <div>
-          <h1 className="text-center font-bold text-xl lg:text-4xl my-10">
+          <h1 className="text-center font-semibold text-xl lg:text-4xl">
             Create Donation Reaquest
           </h1>
-          <form onSubmit={handleCreateDonationRequest} className="py-10">
+          <form data-aos="fade-up" data-aos-duration="1500" onSubmit={handleCreateDonationRequest} className="py-10">
             <div className="flex flex-col lg:flex-row justify-around p-3 text-[12px] md:text-[15px]">
               <div className="space-y-2 md:space-y-3 lg:space-y-10">
                 <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7">

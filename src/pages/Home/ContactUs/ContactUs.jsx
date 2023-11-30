@@ -1,6 +1,15 @@
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+
 const ContactUs = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      AOS.init({ once: true });
+    }, 1000);
+  }, []);
   return (
-    <div className="bg-red-500 flex flex-col-reverse md:flex-row justify-center items-center md:gap-8 lg:gap-96">
+    <div data-aos="zoom-out" className="bg-red-500 flex flex-col-reverse md:flex-row justify-center items-center md:gap-8 lg:gap-96">
       <div className="p-10">
         <form className="p-5 lg:p-2 rounded-md flex flex-col gap-3 lg:gap-5 bg-white">
           <h1 className="font-bold lg:text-2xl text-center ">

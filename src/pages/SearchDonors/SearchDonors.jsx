@@ -179,7 +179,7 @@ const SearchDonors = () => {
             </form>
             <button
               onClick={donwloadResult}
-              className="ml-3 w-[14vw] text-center text-xl text-black font-semibold rounded-full  py-1 lg:py-2 bg-white disabled:cursor-not-allowed"
+              className="ml-3 w-[71vw] md:w-[75vw] lg:w-[14vw] text-center text-xl text-black font-semibold rounded-full  py-1 lg:py-2 bg-white disabled:cursor-not-allowed"
             >
               Download Result
             </button>
